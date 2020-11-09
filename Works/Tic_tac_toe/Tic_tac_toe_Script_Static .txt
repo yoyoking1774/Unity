@@ -1,0 +1,43 @@
+/*
+ * Tic_tac_toe整體相關變數
+ * 
+ */
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Tic_tac_toe_Script : MonoBehaviour
+{
+
+    //======================================
+    //宣告變數
+    //======================================
+
+    //決定是要放哪一個Sprite 圈或叉，true:圈 false:叉，初始為圈
+    public static bool Tic_Sprite = true;
+
+    //達成連線的數量
+    public static int Line_Number = 3;
+
+
+    //======================================
+    //初始化
+    //======================================
+    public static void Initial() {
+        Tic_Sprite = true;
+
+        Line_Number = 3;
+    }
+
+    //======================================
+    //副程式:變更圈或叉
+    //======================================
+    public static void Tic_Change() {
+        //如果是true就變false，如果是false就變true。
+        Tic_Sprite = !Tic_Sprite;
+    }
+
+
+
+}//Tic_tac_toe_Script

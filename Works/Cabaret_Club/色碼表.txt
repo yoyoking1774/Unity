@@ -1,0 +1,13 @@
+外框       737373 255
+主顏色     4A6BF8 255
+對手主顏色 9D8F8F 255
+Hp         FF7C7C 255
+Talk       70A7FF 255
+Party      FFB65F 255
+Love       FF58E8 255
+Skill      61FF99 255
+
+DCircle    8DA3FF 255
+Circle     F886D0 255
+Triangle   019A5F 255
+Cross      FF001B 255

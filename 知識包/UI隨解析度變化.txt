@@ -1,0 +1,7 @@
+1. 將Canvas的Render Mode 改為 Screen Space - Camera
+2. 將Main Camera放入Render Camera
+
+3. 將Canvas的 UI Scale Mode 改為 Scale With Screen Size
+4. 將Reference Resolution   改為 常用的解析度
+
+5. 將UI(如Text Image等) 左上角方格 改為 中間紅色十字，不要藍色十字

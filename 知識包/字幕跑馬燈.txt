@@ -1,0 +1,87 @@
+void Button1Click(object sender, EventArgs e)
+{
+    //用東方神起的中文版歌詞當範例@@，剛好寫程式時在聽 ...
+    //剛好也可以示範一下字串在程式碼中如何斷行 ...
+    //還有換行符號 ...
+    string str = 
+        "一次 一次也沒有 直到最後也沒有對我敞開心扉\r\n" + 
+        "我就想面壁而立的心情 你知道嗎\r\n" + 
+        "\r\n" + 
+        "雖然在身邊卻變得更加孤獨\r\n" + 
+        "tonight tonight tonight\r\n" + 
+        "\r\n" + 
+        "雖然等待了你 但不會這樣了\r\n" + 
+        "現在我要離開你\r\n" + 
+        "\r\n" + 
+        "不要走 我一句都不會說 你這個傻瓜\r\n" + 
+        "我為什麼只看著你這個傻瓜 那麼不爭氣的你\r\n" + 
+        "\r\n" + 
+        "baby catch me catch me catch me girl tonight\r\n" + 
+        "在我離開你之前(I'm serious I'm serious)\r\n" + 
+        "\r\n" + 
+        "抓著我不讓走 哭著打我 如果告訴我理由\r\n" + 
+        "(I'm serious I'm serious)\r\n" + 
+        "\r\n" + 
+        "我不知道 我還不知道我在你心裡面到底有多深\r\n" + 
+        "我很想知道 在我疲憊放棄前\r\n" + 
+        "\r\n" + 
+        "告訴我吧 告訴我吧 回答我\r\n" + 
+        "\r\n" + 
+        "時間就這麼全花在你身上 現在 在那個位置上\r\n" + 
+        "不要送別我 你會後悔的 不要犯蠢\r\n" + 
+        "\r\n" + 
+        "不要走 我一句都不會說 你這個傻瓜\r\n" + 
+        "我為什麼只看著你這個傻瓜 那麼不爭氣的你\r\n" + 
+        "\r\n" + 
+        "之前你對於我來說\r\n" + 
+        "我記得那只被你充滿的心情 真的很幸福\r\n" + 
+        "\r\n" + 
+        "會像我這樣等帶著你的人 no 你不要忘記了\r\n" + 
+        "\r\n" + 
+        "現在或未來都不要離開我 對我說這樣的話吧\r\n" + 
+        "太遲鈍了 直到你整理好心情之時\r\n" + 
+        "\r\n" + 
+        "我都會只看著你 我到底是為什麼\r\n" + 
+        "希望你來哀求我 我會等你的\r\n" + 
+        "\r\n" + 
+        "現在或未來都不要離開我 對我說這樣的話吧\r\n" + 
+        "傻瓜 我為什麼會愛你\r\n" + 
+        "\r\n" + 
+        "只愛你這到底為什麼\r\n" + 
+        "\r\n" + 
+        "不要走 我一句都不會說 你這個傻瓜\r\n" + 
+        "我為什麼只看著你這個傻瓜 那麼不爭氣的你\r\n" + 
+        "\r\n" + 
+        "baby catch me catch me catch me girl tonight\r\n" + 
+        "在我離開你之前(I'm serious I'm serious)\r\n" + 
+        "\r\n" + 
+        "抓著我不讓走 哭著打我 如果告訴我理由\r\n" + 
+        "(I'm serious I'm serious)\r\n" + 
+        "\r\n" + 
+        "chtch me if you wanna";
+     
+    StringDelayPrint(str);
+}
+ 
+void StringDelayPrint(string str)
+{
+    if(timer1.Enabled == true) return; //如果已經在顯示中，不要繼續重複動作
+    txtPrint.Text = ""; //清除顯示用的TextBox
+    txtPrintBuffer.Text = str; //將要顯示的字串存到暫存TextBox中
+    timer1.Interval = 300; //設定每字顯示的間隔時間，毫秒為單位
+    timer1.Enabled = true; //將Timer元件啟動
+}
+ 
+void Timer1Tick(object sender, EventArgs e)
+{
+    string str = txtPrintBuffer.Text; //取出欲顯示的字串，string做處理比較方便
+    txtPrint.Text = txtPrint.Text + str[txtPrint.TextLength]; //逐字顯示
+     
+    //以下三行是讓TextBox自動捲到最下面
+    txtPrint.SelectionStart = txtPrint.Text.Length;*
+    txtPrint.ScrollToCaret(); 
+    txtPrint.Refresh();
+     
+    //如果已經顯示字串最尾，就停止Timer
+    if(txtPrint.TextLength == str.Length) timer1.Enabled = false;
+}

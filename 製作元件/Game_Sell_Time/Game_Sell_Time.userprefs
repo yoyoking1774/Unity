@@ -1,0 +1,19 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02_Script\GameDetail_Class.cs">
+    <Files>
+      <File FileName="Assets\02_Script\GameDetail_Class.cs" Line="1" Column="1" />
+      <File FileName="Assets\02_Script\ObjectPool.cs" Line="1" Column="1" />
+      <File FileName="Assets\02_Script\Game_DataBase.cs" Line="1" Column="1" />
+      <File FileName="Assets\02_Script\PageChangeScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\02_Script\SearchPage.cs" Line="1" Column="1" />
+      <File FileName="Assets\02_Script\TopBar.cs" Line="1" Column="1" />
+      <File FileName="Assets\02_Script\BottomBar.cs" Line="1" Column="1" />
+      <File FileName="Assets\02_Script\AnimationScript.cs" Line="22" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
