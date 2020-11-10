@@ -1,278 +1,279 @@
-//¸gÀç­¶­± UI±±¨î ÅŞ¿è¹Bºâ 
+//æ–°æ–‡å­—æ–‡ä»¶
+//ç¶“ç‡Ÿé é¢ UIæ§åˆ¶ é‚è¼¯é‹ç®— 
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
 public class Manage : MonoBehaviour {
 
-  //«Å§iÅÜ¼Æ==============================================================================
-	//°Ï°ì½s¸¹
+  //å®£å‘Šè®Šæ•¸==============================================================================
+	//å€åŸŸç·¨è™Ÿ
 	public static int Manage_Area_Number = 0; 
-	//¿ï¾Ü§ë¸ê©±¾Q½s¸¹
+	//é¸æ“‡æŠ•è³‡åº—é‹ªç·¨è™Ÿ
 	int Invest_Store_Number = 0;
 
-	//¸g²z²{¦b¿ï¾Ü½s¸¹
+	//ç¶“ç†ç¾åœ¨é¸æ“‡ç·¨è™Ÿ
 	int Now_Select_Manage_Number = 0;
-	//Äµ½Ã²{¦b¿ï¾Ü½s¸¹
+	//è­¦è¡›ç¾åœ¨é¸æ“‡ç·¨è™Ÿ
 	int Now_Select_Security_Number = 0;
-	//ÅU°İ²{¦b¿ï¾Ü½s¸¹
+	//é¡§å•ç¾åœ¨é¸æ“‡ç·¨è™Ÿ
 	int Now_Select_Consultant_Number = 0;
 
-	//¤w¹µ¥Î¸g²z³Ì¤j½s¸¹
+	//å·²åƒ±ç”¨ç¶“ç†æœ€å¤§ç·¨è™Ÿ
 	int Now_Max_Manage_Number = 0;
-	//¤w¹µ¥ÎÄµ½Ã³Ì¤j½s¸¹
+	//å·²åƒ±ç”¨è­¦è¡›æœ€å¤§ç·¨è™Ÿ
 	int Now_Max_Security_Number = 0;
-	//¤w¹µ¥ÎÅU°İ³Ì¤j½s¸¹
+	//å·²åƒ±ç”¨é¡§å•æœ€å¤§ç·¨è™Ÿ
 	int Now_Max_Consultant_Number = 0;
 
-	//¬O§_¬°¨M©wµe­± true:¬O fasle:¤£¬O
+	//æ˜¯å¦ç‚ºæ±ºå®šç•«é¢ true:æ˜¯ fasle:ä¸æ˜¯
 	bool DecisionBool = false;
 
-	//¬O§_¶i¤J©±¾Q¸gÅç°Êµe true:¶i¤J°Êµe false:¥¼¶i¤J°Êµe
+	//æ˜¯å¦é€²å…¥åº—é‹ªç¶“é©—å‹•ç•« true:é€²å…¥å‹•ç•« false:æœªé€²å…¥å‹•ç•«
 	bool LevelEx_Bool = false;
-	//©±¾Q¸gÅç­È¼È¦s
+	//åº—é‹ªç¶“é©—å€¼æš«å­˜
 	float LevelEx_Temp;
-	//°Êµe®É¶¡
+	//å‹•ç•«æ™‚é–“
 	float LevelEx_Temp_Time = 2.0f;
-  //«Å§iUI================================================================================
+  //å®£å‘ŠUI================================================================================
 	//Scroll*******************************************************
 	public Scrollbar scrollbar;
 	//GameObject**************************************************
-	//Workµe­±
+	//Workç•«é¢
 	public GameObject WorkBackGround;
-	//Manageµe­±
+	//Manageç•«é¢
 	public GameObject ManageBackGround;
-	//ÅU°İ¿ï¾Üµe­±
+	//é¡§å•é¸æ“‡ç•«é¢
 	public GameObject ManageStore;
-	//¨M©wµe­±
+	//æ±ºå®šç•«é¢
 	public GameObject Decision;
-	//©±¾Qµe­±
+	//åº—é‹ªç•«é¢
 	public GameObject StoreBackGround;
-	//¤H­ûµe­±
+	//äººå“¡ç•«é¢
 	public GameObject ManagePeopleBackGround;
-	//°Ï°ì­I´º¹Ï¤ù
+	//å€åŸŸèƒŒæ™¯åœ–ç‰‡
 	public GameObject OnePlace;
 	public GameObject TwoPlace;
 	public GameObject ThreePlace;
 	public GameObject FourPlace;
 	public GameObject FivePlace;
-  //«ö¶s==========================================================
+  //æŒ‰éˆ•==========================================================
 	public Button LeftButton;
 
-	//©±¾Q­¶­±«ö¶s*************************************************
-	//©±¾Q«ö¶s
+	//åº—é‹ªé é¢æŒ‰éˆ•*************************************************
+	//åº—é‹ªæŒ‰éˆ•
 	public Button StoreButton;
-	//©±çE¸gÀç«ö¶s
+	//åº—èˆ–ç¶“ç‡ŸæŒ‰éˆ•
 	public Button[] ManageButton = new Button[10];
-	//©±çE§ë¸ê«ö¶s
+	//åº—èˆ–æŠ•è³‡æŒ‰éˆ•
 	public Button ManageInvestionButton;
-	//©±çE¨ú®ø§ë¸ê«ö¶s
+	//åº—èˆ–å–æ¶ˆæŠ•è³‡æŒ‰éˆ•
 	public Button ManageCancelButton;
-	//¤W¤@¦ì«ö¶s
+	//ä¸Šä¸€ä½æŒ‰éˆ•
 	public Button PreviousButton;
-	//¤U¤@¦ì«ö¶s
+	//ä¸‹ä¸€ä½æŒ‰éˆ•
 	public Button NextButton;
 
-	//¤H­û­¶­±«ö¶s*************************************************
-	//¤H­û«ö¶s
+	//äººå“¡é é¢æŒ‰éˆ•*************************************************
+	//äººå“¡æŒ‰éˆ•
 	public Button PeopleButton;
-	//¸g²z¥X¶Ô«ö¶s
+	//ç¶“ç†å‡ºå‹¤æŒ‰éˆ•
 	public Button Manage_Work_Button;
-	//¸g²z¨ø¥ô«ö¶s
+	//ç¶“ç†å¸ä»»æŒ‰éˆ•
 	public Button Manage_UnWork_Button;
-	//Äµ½Ã¥X¶Ô«ö¶s
+	//è­¦è¡›å‡ºå‹¤æŒ‰éˆ•
 	public Button Security_Work_Button;
-	//Äµ½Ã¨ø¥ô«ö¶s
+	//è­¦è¡›å¸ä»»æŒ‰éˆ•
 	public Button Security_UnWork_Button;
 
   //Text==========================================================
-	//«ù¦³ª÷¿ú
+	//æŒæœ‰é‡‘éŒ¢
 	public Text OwnMoney_Text;
 
-	//°Ï°ì¦WºÙ
+	//å€åŸŸåç¨±
 	public Text AreaName_Text;
-	//¦û¦³²v
+	//ä½”æœ‰ç‡
 	public Text OccupancyPresent_Text;
-	//©±¾Q¼Æ
+	//åº—é‹ªæ•¸
 	public Text StoreNumber_Text;
-	//¹w´Á§Q¼í
+	//é æœŸåˆ©æ½¤
 	public Text Predict_Text;
 
-	//©±¾Q***************************************************
-	//©±¾Q¦WºÙ
+	//åº—é‹ª***************************************************
+	//åº—é‹ªåç¨±
 	public Text[] StoreName_Text = new Text[10];
-	//©±¾Q¹w´Á§Q¼í
+	//åº—é‹ªé æœŸåˆ©æ½¤
 	public Text[] StorePredict_Text = new Text[10];
-	//©±¾Qµ¥¯Å
+	//åº—é‹ªç­‰ç´š
 	public Text[] StoreLevel_Text = new Text[10];
 
-	//ÅU°İ¦WºÙ
+	//é¡§å•åç¨±
 	public Text ConsultantName_Text;
-	//ÅU°İ¤ä´©¯à¤O
+	//é¡§å•æ”¯æ´èƒ½åŠ›
 	public Text AdvantageNumber1_Text;
 	public Text AdvantageNumber2_Text;
 	public Text AdvantageNumber3_Text;
 	public Text AdvantageNumber4_Text;
 	public Text AdvantageNumber5_Text;
-	//ÅU°İ¤ä´©¯à¤O
+	//é¡§å•æ”¯æ´èƒ½åŠ›
 	public Text ConsultantAdvantage_Text;
-	//ÅU°İÁ~¤ô
+	//é¡§å•è–ªæ°´
 	public Text ConsultantSalary_Text;
 
-	//¤H­û***************************************************
-	//¸g²z¦WºÙ
+	//äººå“¡***************************************************
+	//ç¶“ç†åç¨±
 	public Text ManageName_Text;
-	//¸g²z¯à¤O¶¥¯Å
+	//ç¶“ç†èƒ½åŠ›éšç´š
 	public Text ManageNumber_Text;
-	//¸g²zÁ~¤ô
+	//ç¶“ç†è–ªæ°´
 	public Text ManageSalary_Text;
-	//¸g²z¦Û§Ú¤¶²Ğ
+	//ç¶“ç†è‡ªæˆ‘ä»‹ç´¹
 	public Text ManageIntroduce_Text;
 
-	//Äµ½Ã¦WºÙ
+	//è­¦è¡›åç¨±
 	public Text SecurityName_Text;
-	//Äµ½Ã¯à¤O¶¥¯Å
+	//è­¦è¡›èƒ½åŠ›éšç´š
 	public Text SecurityNumber_Text;
-	//Äµ½ÃÁ~¤ô
+	//è­¦è¡›è–ªæ°´
 	public Text SecuritySalary_Text;
-	//Äµ½Ã¦Û§Ú¤¶²Ğ
+	//è­¦è¡›è‡ªæˆ‘ä»‹ç´¹
 	public Text SecurityIntroduce_Text;
 
   //Image==========================================================
-	//°Ï°ì¹Ï¤ù
+	//å€åŸŸåœ–ç‰‡
 	public Image Area_Image;
-	//°Ï°ì¦û¦³²v¹Ï¤ù
+	//å€åŸŸä½”æœ‰ç‡åœ–ç‰‡
 	public Image Present_Image;
 
 
 
-	//©±¾Q***************************************************
-	//©±¾Q¹Ï¤ù
+	//åº—é‹ª***************************************************
+	//åº—é‹ªåœ–ç‰‡
 	public Image[] Store_Image = new Image[10];
-	//©±¾Q¤ÀÃş¹Ï¤ù
+	//åº—é‹ªåˆ†é¡åœ–ç‰‡
 	public Image[] ClassImage = new Image[10];
-	//©±¾Q¬O§_§ë¸ê¹Ï¤ù
+	//åº—é‹ªæ˜¯å¦æŠ•è³‡åœ–ç‰‡
 	public Image[] InvestImage = new Image[10];
-	//¾Ö¦³©±¾Q¹Ï¤ù
+	//æ“æœ‰åº—é‹ªåœ–ç‰‡
 	public Image[] OwnImage = new Image[10];
-	//¥¼¾Ö¦³©±¾Q¹Ï¤ù
+	//æœªæ“æœ‰åº—é‹ªåœ–ç‰‡
 	public Image[] UnOwnImage = new Image[10];
-	//©±çEµ¥¯Åªø±ø¹Ï
+	//åº—èˆ–ç­‰ç´šé•·æ¢åœ–
 	public Image[] LevelBarImage = new Image[10];
 
 
-	//¤H­û***************************************************
-	//¸g²z¹Ï¤ù
+	//äººå“¡***************************************************
+	//ç¶“ç†åœ–ç‰‡
 	public Image ManageImage;
-	//¸g²z¯à¤O¶¥¯Å¹Ï¤ù
+	//ç¶“ç†èƒ½åŠ›éšç´šåœ–ç‰‡
 	public Image ManageNumber_Image;
-	//¸g²z¥X¶Ô¹Ï¤ù
+	//ç¶“ç†å‡ºå‹¤åœ–ç‰‡
 	public Image ManageWork_Image;
 
-	//Äµ½Ã¹Ï¤ù
+	//è­¦è¡›åœ–ç‰‡
 	public Image SecurityImage;
-	//Äµ½Ã¯à¤O¶¥¯Å¹Ï¤ù
+	//è­¦è¡›èƒ½åŠ›éšç´šåœ–ç‰‡
 	public Image SecurityManageNumber_Image;
-	//Äµ½Ã¥X¶Ô¹Ï¤ù
+	//è­¦è¡›å‡ºå‹¤åœ–ç‰‡
 	public Image SecurityWork_Image;
 
-	//ÅU°İ¹Ï¤ù
+	//é¡§å•åœ–ç‰‡
 	public Image ConsultantImage;
-	//ÅU°İ¯à¤O¶¥¯Å¹Ï¤ù
+	//é¡§å•èƒ½åŠ›éšç´šåœ–ç‰‡
 	public Image ConsultantManageNumber_Image;
 
 
-	//°Ï°ì¸g²z¹Ï¤ù
+	//å€åŸŸç¶“ç†åœ–ç‰‡
 	public Image EconomyPeople_Image;
-	//°Ï°ìÄµ½Ã¹Ï¤ù
+	//å€åŸŸè­¦è¡›åœ–ç‰‡
 	public Image SecurityPeople_Image;
-	//´º®ğ¹Ï¤ù
+	//æ™¯æ°£åœ–ç‰‡
 	public Image NowEconomy_Image;
-	//ªv¦w¹Ï¤ù
+	//æ²»å®‰åœ–ç‰‡
 	public Image NowSecurity_Image;
 
-	//«Å§i°Êµe============================================================
-	//©±¾Q¹w´Á§Q¼í¤W¤É°Êµe
+	//å®£å‘Šå‹•ç•«============================================================
+	//åº—é‹ªé æœŸåˆ©æ½¤ä¸Šå‡å‹•ç•«
 	public Animation[] Predict_UP_Animation = new Animation[10];
-	//°Ï°ìÁ`¹w´Á§Q¼í¤W¤É°Êµe
+	//å€åŸŸç¸½é æœŸåˆ©æ½¤ä¸Šå‡å‹•ç•«
 	public Animation Area_Predict_UP_Animation;
-	//©±¾Qµ¥¯Å¤W¤É°Êµe
+	//åº—é‹ªç­‰ç´šä¸Šå‡å‹•ç•«
 	public Animation[] Level_UP_Animation = new Animation[10];
-	//«ü¬£¸g²z Äµ½Ã°Êµe
+	//æŒ‡æ´¾ç¶“ç† è­¦è¡›å‹•ç•«
 	public Animation[] Now_Manage_Security_Animation = new Animation[2];
-	//«ù¦³ª÷¿úÅÜ¤Æ°Êµe
+	//æŒæœ‰é‡‘éŒ¢è®ŠåŒ–å‹•ç•«
 	public Animation Own_Money_Change_Animation;
-	//ÅU°İ¿ï¾Ü°Êµe
+	//é¡§å•é¸æ“‡å‹•ç•«
 	public Animation ConsultantBackGround_Animation;
 
 	public Scrollbar S;
 
 	// Use this for initialization
 	void Start () {
-		//±N©±¾Q«ö¶s³]¬°¤£¥i¥Î
+		//å°‡åº—é‹ªæŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 		StoreButton.interactable = false;
-		//¤H­û«ö¶s³]¬°¥i¥Î
+		//äººå“¡æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 		PeopleButton.interactable = true; 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		//³]©w«ö¶s=========================================================
-		//¶i¤Jµe­±³]©w¤w¾Ö¦³ªº©±¾Qªº¸gÀç«ö¶s¬°¥i¥Î©Î¤£¥i¥Î
+		//è¨­å®šæŒ‰éˆ•=========================================================
+		//é€²å…¥ç•«é¢è¨­å®šå·²æ“æœ‰çš„åº—é‹ªçš„ç¶“ç‡ŸæŒ‰éˆ•ç‚ºå¯ç”¨æˆ–ä¸å¯ç”¨
 		Set_First_ManageButton();
 
-		//³]©wText==========================================================
-		//«ù¦³ª÷¿ú
+		//è¨­å®šText==========================================================
+		//æŒæœ‰é‡‘éŒ¢
 		MainState.SetText_OwnMoney(OwnMoney_Text);
-		//°Ï°ì¦WºÙ
+		//å€åŸŸåç¨±
 		Set_AreaName_Text(AreaName_Text);
-		//¦û¦³²v
+		//ä½”æœ‰ç‡
 		Set_OccupancyPresent_Text (OccupancyPresent_Text);
-		//©±¾Q¼Æ
+		//åº—é‹ªæ•¸
 		Set_StoreNumber_Text(StoreNumber_Text);
-		//¹w´Á§Q¼í
+		//é æœŸåˆ©æ½¤
 		Set_Price_Text(Predict_Text);
-		//©±¾Q¦WºÙ
+		//åº—é‹ªåç¨±
 		Set_StoreName_Text(StoreName_Text);
-		//©±¾Q¹w´Á§Q¼í
+		//åº—é‹ªé æœŸåˆ©æ½¤
 		Set_StorePredict_Text(StorePredict_Text);
-		//©±¾Qµ¥¯Å
+		//åº—é‹ªç­‰ç´š
 		Set_StoreLevel_Text(StoreLevel_Text);
-		//§ä¥X¤w¶±¥Î¸g²z Äµ½Ã ÅU°İ³Ì¤j½s¸¹ 
+		//æ‰¾å‡ºå·²é›‡ç”¨ç¶“ç† è­¦è¡› é¡§å•æœ€å¤§ç·¨è™Ÿ 
 		Find_Max_Employee_Number();
-		//³]©w¤ä´©¯à¤OÃC¦â
+		//è¨­å®šæ”¯æ´èƒ½åŠ›é¡è‰²
 		if(Decision) AdvantageNumber_Color();
 
-		//³]©w¹Ï¤ù==========================================================
-		//³]©w°Ï°ì­I´º¹Ï¤ù
+		//è¨­å®šåœ–ç‰‡==========================================================
+		//è¨­å®šå€åŸŸèƒŒæ™¯åœ–ç‰‡
 		Set_PlaceBackGround_Image();
-		//°Æµ{¦¡:³]©w°Ï°ì¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šå€åŸŸåœ–ç‰‡
 		Set_Place_Image();
-		//°Æµ{¦¡:³]©w¦û¦³²v¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šä½”æœ‰ç‡åœ–ç‰‡
 		Set_Present_Image();
-		//°Æµ{¦¡:³]©w°Ï°ì¸g²z¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šå€åŸŸç¶“ç†åœ–ç‰‡
 		Set_Area_Manage_Image ();
-		//°Æµ{¦¡:³]©w°Ï°ìÄµ½Ã¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šå€åŸŸè­¦è¡›åœ–ç‰‡
 		Set_Area_Security_Image();
-		//°Æµ{¦¡:³]©w©±¾Q¤ÀÃş¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªåˆ†é¡åœ–ç‰‡
 		Set_Store_Class_Image();
-		//°Æµ{¦¡:³]©w©±¾Q¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªåœ–ç‰‡
 		Set_Store_Image();
-		//°Æµ{¦¡:³]©w©±¾Q§ë¸ê¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªæŠ•è³‡åœ–ç‰‡
 		Set_Store_Invest_Image();
-		//°Æµ{¦¡:³]©w©±¾Q¬O§_¾Ö¦³¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªæ˜¯å¦æ“æœ‰åœ–ç‰‡
 		Set_Store_Own_Image();
-		//°Æµ{¦¡:³]©w©±¾Qµ¥¯Å¸gÅç¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªç­‰ç´šç¶“é©—åœ–ç‰‡
 		Set_Store_LevelEX_Image();
-		//°Æµ{¦¡:³]©w¥X¶Ô¤¤¹Ï¤ù©M¥X¶Ô«ö¶s
+		//å‰¯ç¨‹å¼:è¨­å®šå‡ºå‹¤ä¸­åœ–ç‰‡å’Œå‡ºå‹¤æŒ‰éˆ•
 		Set_Work_Image_Button();
-		//°Æµ{¦¡:³]©w´º®ğ¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šæ™¯æ°£åœ–ç‰‡
 		Set_NowEconomy_Image();
-		//°Æµ{¦¡:³]©wªv¦w¹Ï¤ù
+		//å‰¯ç¨‹å¼:è¨­å®šæ²»å®‰åœ–ç‰‡
 		Set_NowSecurity_Image();
 
-		//©±¾Q¸gÅç°Êµe=====================================================
+		//åº—é‹ªç¶“é©—å‹•ç•«=====================================================
 		if(LevelEx_Bool) LevelEx_ADD(Invest_Store_Number);
 
 		//Android_ScrollBar();
@@ -280,116 +281,116 @@ public class Manage : MonoBehaviour {
 	}
 
 
-	//°Æµ{¦¡:³]©w°Ï°ì¦WºÙText
+	//å‰¯ç¨‹å¼:è¨­å®šå€åŸŸåç¨±Text
 	void Set_AreaName_Text(Text AreaName_Text){
 		switch(Manage_Area_Number){
-		 //ÄÑ¥]®v³Å
+		 //éºµåŒ…å¸«å‚…
 		case 0:
-			AreaName_Text.text = "<color=#F1C080FF>ÄÑ¥]®v³Å°Ï°ì</color>";
+			AreaName_Text.text = "<color=#F1C080FF>éºµåŒ…å¸«å‚…å€åŸŸ</color>";
 			break;
-		//­µ¼Ö¤H
+		//éŸ³æ¨‚äºº
 		case 1:
-			AreaName_Text.text = "<color=#E4F3E0FF>­µ¼Ö¤H°Ï°ì</color>";
+			AreaName_Text.text = "<color=#E4F3E0FF>éŸ³æ¨‚äººå€åŸŸ</color>";
 			break;
-		//¬ì§Ş·s¶Q
+		//ç§‘æŠ€æ–°è²´
 		case 2:
-			AreaName_Text.text = "<color=#7FB4FFFF>¬ì§Ş·s¶Q°Ï°ì</color>";
+			AreaName_Text.text = "<color=#7FB4FFFF>ç§‘æŠ€æ–°è²´å€åŸŸ</color>";
 			break;
-		//¾÷¤u
+		//æ©Ÿå·¥
 		case 3:
-			AreaName_Text.text = "<color=#FF9090FF>¾÷¤u°Ï°ì</color>";
+			AreaName_Text.text = "<color=#FF9090FF>æ©Ÿå·¥å€åŸŸ</color>";
 			break;
-		//»È¦æ®a
+		//éŠ€è¡Œå®¶
 		case 4:
-			AreaName_Text.text = "<color=#FFAAE4FF>»È¦æ®a°Ï°ì</color>";
+			AreaName_Text.text = "<color=#FFAAE4FF>éŠ€è¡Œå®¶å€åŸŸ</color>";
 			break;
 		}//switch
 	}
-	//°Æµ{¦¡:³]©w¥e¦³²vText
+	//å‰¯ç¨‹å¼:è¨­å®šå æœ‰ç‡Text
 	void Set_OccupancyPresent_Text(Text OccupancyPresent_Text){
 		switch(Manage_Area_Number){
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
 			OccupancyPresent_Text.text = MainState.BreadArea.GetPresent() + "%";
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
 			OccupancyPresent_Text.text = MainState.MusicArea.GetPresent() + "%";
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
 			OccupancyPresent_Text.text = MainState.TehcnologyArea.GetPresent() + "%";
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
 			OccupancyPresent_Text.text = MainState.FactoryArea.GetPresent() + "%";
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
 			OccupancyPresent_Text.text = MainState.EconomicArea.GetPresent() + "%";
 			break;
 		}//switch
 	}
-	//°Æµ{¦¡:³]©w©±¾Q¼ÆText
+	//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªæ•¸Text
 	void Set_StoreNumber_Text(Text StoreNumber_Text){
-		//©±¾Q¼Æ
+		//åº—é‹ªæ•¸
 		int StoreTemp = 0;
 
 		switch(Manage_Area_Number){
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
 			for (int i = 0; i < MainState.BreadStoreNumber; i++) {
 				if (MainState.BreadStore [i].GetOwnBool()) {
 					StoreTemp = StoreTemp + 1;
 				}
 			}
-			StoreNumber_Text.text = StoreTemp + " / " + MainState.BreadStoreNumber + "¶¡";
+			StoreNumber_Text.text = StoreTemp + " / " + MainState.BreadStoreNumber + "é–“";
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
 			for (int i = 0; i < MainState.MusicStoreNumber; i++) {
 				if (MainState.MusicStore [i].GetOwnBool()) {
 					StoreTemp = StoreTemp + 1;
 				}
 			}
-			StoreNumber_Text.text = StoreTemp + " / " + MainState.MusicStoreNumber + "¶¡";
+			StoreNumber_Text.text = StoreTemp + " / " + MainState.MusicStoreNumber + "é–“";
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
 			for (int i = 0; i < MainState.TehcnologyStoreNumber; i++) {
 				if (MainState.TehcnologyStore [i].GetOwnBool()) {
 					StoreTemp = StoreTemp + 1;
 				}
 			}
-			StoreNumber_Text.text = StoreTemp + " / " + MainState.TehcnologyStoreNumber + "¶¡";
+			StoreNumber_Text.text = StoreTemp + " / " + MainState.TehcnologyStoreNumber + "é–“";
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
 			for (int i = 0; i < MainState.FactoryStoreNumber; i++) {
 				if (MainState.FactoryStore [i].GetOwnBool()) {
 					StoreTemp = StoreTemp + 1;
 				}
 			}
-			StoreNumber_Text.text = StoreTemp + " / " + MainState.FactoryStoreNumber + "¶¡";
+			StoreNumber_Text.text = StoreTemp + " / " + MainState.FactoryStoreNumber + "é–“";
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
 			for (int i = 0; i < MainState.EconomicStoreNumber; i++) {
 				if (MainState.EconomicStore [i].GetOwnBool()) {
 					StoreTemp = StoreTemp + 1;
 				}
 			}
-			StoreNumber_Text.text = StoreTemp + " / " + MainState.EconomicStoreNumber + "¶¡";
+			StoreNumber_Text.text = StoreTemp + " / " + MainState.EconomicStoreNumber + "é–“";
 			break;
 		}//switch
 	}
 
-	//°Æµ{¦¡:³]©w¹w´Á§Q¼íText
+	//å‰¯ç¨‹å¼:è¨­å®šé æœŸåˆ©æ½¤Text
 	void Set_Price_Text(Text Predict_Text){
 		uint PriceTemp = 0;
 
 		switch(Manage_Area_Number){
-		//¹w´Á§Q¼í(ÄÑ¥]®v³Å)
+		//é æœŸåˆ©æ½¤(éºµåŒ…å¸«å‚…)
 		case 0:
 		for (int i = 0; i < MainState.BreadStoreNumber; i++) {
 			if (MainState.BreadStore [i].GetOwnBool ())
@@ -398,7 +399,7 @@ public class Manage : MonoBehaviour {
 		MainState.SetText_Pricey (PriceTemp, Predict_Text);
 		PriceTemp = 0;
 		break;
-		//¹w´Á§Q¼í(­µ¼Ö¤H)
+		//é æœŸåˆ©æ½¤(éŸ³æ¨‚äºº)
 		case 1:
 		for (int i = 0; i < MainState.MusicStoreNumber; i++) {
 			if (MainState.MusicStore [i].GetOwnBool())
@@ -407,7 +408,7 @@ public class Manage : MonoBehaviour {
 		MainState.SetText_Pricey (PriceTemp,Predict_Text);
 		PriceTemp = 0;
 		break;
-		//¹w´Á§Q¼í(¬ì§Ş·s¶Q)
+		//é æœŸåˆ©æ½¤(ç§‘æŠ€æ–°è²´)
 		case 2:
 		for (int i = 0; i < MainState.TehcnologyStoreNumber; i++) {
 			if (MainState.TehcnologyStore [i].GetOwnBool ())
@@ -416,7 +417,7 @@ public class Manage : MonoBehaviour {
 		MainState.SetText_Pricey (PriceTemp, Predict_Text);
 		PriceTemp = 0;
 		break;
-		//¹w´Á§Q¼í(¾÷¤u)
+		//é æœŸåˆ©æ½¤(æ©Ÿå·¥)
 		case 3:
 		for (int i = 0; i < MainState.FactoryStoreNumber; i++) {
 			if (MainState.FactoryStore [i].GetOwnBool ())
@@ -425,7 +426,7 @@ public class Manage : MonoBehaviour {
 		MainState.SetText_Pricey (PriceTemp, Predict_Text);
 		PriceTemp = 0;
 		break;
-		//¹w´Á§Q¼í(»È¦æ®a)
+		//é æœŸåˆ©æ½¤(éŠ€è¡Œå®¶)
 		case 4:
 		for (int i = 0; i < MainState.EconomicStoreNumber; i++) {
 			if (MainState.EconomicStore [i].GetOwnBool())
@@ -438,35 +439,35 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:³]©w©±¾Q¦WºÙText
+	//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªåç¨±Text
 	void Set_StoreName_Text(Text[] StoreName_Text){
 		
 		switch(Manage_Area_Number){
-		//¹w´Á§Q¼í(ÄÑ¥]®v³Å)
+		//é æœŸåˆ©æ½¤(éºµåŒ…å¸«å‚…)
 		case 0:
 			for (int i = 0; i < MainState.BreadStoreNumber; i++) {
 				StoreName_Text[i].text = MainState.BreadStore[i].GetName();
 			}
 			break;
-			//¹w´Á§Q¼í(­µ¼Ö¤H)
+			//é æœŸåˆ©æ½¤(éŸ³æ¨‚äºº)
 		case 1:
 			for (int i = 0; i < MainState.MusicStoreNumber; i++) {
 				StoreName_Text[i].text = MainState.MusicStore[i].GetName();
 			}
 			break;
-			//¹w´Á§Q¼í(¬ì§Ş·s¶Q)
+			//é æœŸåˆ©æ½¤(ç§‘æŠ€æ–°è²´)
 		case 2:
 			for (int i = 0; i < MainState.TehcnologyStoreNumber; i++) {
 				StoreName_Text[i].text = MainState.TehcnologyStore[i].GetName();
 			}
 			break;
-			//¹w´Á§Q¼í(¾÷¤u)
+			//é æœŸåˆ©æ½¤(æ©Ÿå·¥)
 		case 3:
 			for (int i = 0; i < MainState.FactoryStoreNumber; i++) {
 				StoreName_Text[i].text = MainState.FactoryStore[i].GetName();
 			}
 			break;
-			//¹w´Á§Q¼í(»È¦æ®a)
+			//é æœŸåˆ©æ½¤(éŠ€è¡Œå®¶)
 		case 4:
 			for (int i = 0; i < MainState.EconomicStoreNumber; i++) {
 				StoreName_Text[i].text = MainState.EconomicStore[i].GetName();
@@ -476,42 +477,42 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:³]©w©±¾Q¹w´Á§Q¼íText
+	//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªé æœŸåˆ©æ½¤Text
 	void Set_StorePredict_Text(Text[] StorePredict_Text){
 
 		switch(Manage_Area_Number){
-		//¹w´Á§Q¼í(ÄÑ¥]®v³Å)
+		//é æœŸåˆ©æ½¤(éºµåŒ…å¸«å‚…)
 		case 0:
 			for (int i = 0; i < MainState.BreadStoreNumber; i++) {
-				//¹w´Á§Q¼í = ©±¾Q³Ì§C¹w´Á§Q¼í * ©±¾Qµ¥¯Å
+				//é æœŸåˆ©æ½¤ = åº—é‹ªæœ€ä½é æœŸåˆ©æ½¤ * åº—é‹ªç­‰ç´š
 				MainState.SetText_Pricey (MainState.BreadStore[i].GetPrice()*(uint)MainState.BreadStore[i].GetLevel(), StorePredict_Text[i]);
 			}
 			break;
-			//¹w´Á§Q¼í(­µ¼Ö¤H)
+			//é æœŸåˆ©æ½¤(éŸ³æ¨‚äºº)
 		case 1:
 			for (int i = 0; i < MainState.MusicStoreNumber; i++) {
-				//¹w´Á§Q¼í = ©±¾Q³Ì§C¹w´Á§Q¼í * ©±¾Qµ¥¯Å
+				//é æœŸåˆ©æ½¤ = åº—é‹ªæœ€ä½é æœŸåˆ©æ½¤ * åº—é‹ªç­‰ç´š
 				MainState.SetText_Pricey (MainState.MusicStore[i].GetPrice()*(uint)MainState.MusicStore[i].GetLevel(), StorePredict_Text[i]);
 			}
 			break;
-			//¹w´Á§Q¼í(¬ì§Ş·s¶Q)
+			//é æœŸåˆ©æ½¤(ç§‘æŠ€æ–°è²´)
 		case 2:
 			for (int i = 0; i < MainState.TehcnologyStoreNumber; i++){
-				//¹w´Á§Q¼í = ©±¾Q³Ì§C¹w´Á§Q¼í * ©±¾Qµ¥¯Å
+				//é æœŸåˆ©æ½¤ = åº—é‹ªæœ€ä½é æœŸåˆ©æ½¤ * åº—é‹ªç­‰ç´š
 				MainState.SetText_Pricey (MainState.TehcnologyStore[i].GetPrice()*(uint)MainState.TehcnologyStore[i].GetLevel(), StorePredict_Text[i]);
 			}
 			break;
-			//¹w´Á§Q¼í(¾÷¤u)
+			//é æœŸåˆ©æ½¤(æ©Ÿå·¥)
 		case 3:
 			for (int i = 0; i < MainState.FactoryStoreNumber; i++){
-				//¹w´Á§Q¼í = ©±¾Q³Ì§C¹w´Á§Q¼í * ©±¾Qµ¥¯Å
+				//é æœŸåˆ©æ½¤ = åº—é‹ªæœ€ä½é æœŸåˆ©æ½¤ * åº—é‹ªç­‰ç´š
 				MainState.SetText_Pricey (MainState.FactoryStore[i].GetPrice()*(uint)MainState.FactoryStore[i].GetLevel(), StorePredict_Text[i]);
 			}
 			break;
-			//¹w´Á§Q¼í(»È¦æ®a)
+			//é æœŸåˆ©æ½¤(éŠ€è¡Œå®¶)
 		case 4:
 			for (int i = 0; i < MainState.EconomicStoreNumber; i++){
-				//¹w´Á§Q¼í = ©±¾Q³Ì§C¹w´Á§Q¼í * ©±¾Qµ¥¯Å
+				//é æœŸåˆ©æ½¤ = åº—é‹ªæœ€ä½é æœŸåˆ©æ½¤ * åº—é‹ªç­‰ç´š
 				MainState.SetText_Pricey (MainState.EconomicStore[i].GetPrice()*(uint)MainState.EconomicStore[i].GetLevel(), StorePredict_Text[i]);
 			}
 			break;
@@ -519,35 +520,35 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:³]©w©±¾Qµ¥¯ÅText
+	//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªç­‰ç´šText
 	void Set_StoreLevel_Text(Text[] StoreLevel_Text){
 
 		switch(Manage_Area_Number){
-		//¹w´Á§Q¼í(ÄÑ¥]®v³Å)
+		//é æœŸåˆ©æ½¤(éºµåŒ…å¸«å‚…)
 		case 0:
 			for (int i = 0; i < MainState.BreadStoreNumber; i++) {
 				StoreLevel_Text [i].text = MainState.BreadStore [i].GetLevel () + "";
 			}
 			break;
-			//¹w´Á§Q¼í(­µ¼Ö¤H)
+			//é æœŸåˆ©æ½¤(éŸ³æ¨‚äºº)
 		case 1:
 			for (int i = 0; i < MainState.MusicStoreNumber; i++) {
 				StoreLevel_Text [i].text = MainState.MusicStore [i].GetLevel () + "";
 			}
 			break;
-			//¹w´Á§Q¼í(¬ì§Ş·s¶Q)
+			//é æœŸåˆ©æ½¤(ç§‘æŠ€æ–°è²´)
 		case 2:
 			for (int i = 0; i < MainState.TehcnologyStoreNumber; i++){
 				StoreLevel_Text [i].text = MainState.TehcnologyStore [i].GetLevel () + "";
 			}
 			break;
-			//¹w´Á§Q¼í(¾÷¤u)
+			//é æœŸåˆ©æ½¤(æ©Ÿå·¥)
 		case 3:
 			for (int i = 0; i < MainState.FactoryStoreNumber; i++){
 				StoreLevel_Text [i].text = MainState.FactoryStore [i].GetLevel () + "";
 			}
 			break;
-			//¹w´Á§Q¼í(»È¦æ®a)
+			//é æœŸåˆ©æ½¤(éŠ€è¡Œå®¶)
 		case 4:
 			for (int i = 0; i < MainState.EconomicStoreNumber; i++){
 				StoreLevel_Text [i].text = MainState.EconomicStore [i].GetLevel () + "";
@@ -557,137 +558,137 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:¥Î¤H­û«ö¶s³]©w¸g²z Äµ½ÃText
+	//å‰¯ç¨‹å¼:ç”¨äººå“¡æŒ‰éˆ•è¨­å®šç¶“ç† è­¦è¡›Text
 	public void Set_Manage_Security_Text(){
-		//¼½©ñ«ö¶s­µ®Ä
+		//æ’­æ”¾æŒ‰éˆ•éŸ³æ•ˆ
 		MainState.Button_Sounds_Play();
 
-		//¸g²z¦WºÙ
+		//ç¶“ç†åç¨±
 		ManageName_Text.text = MainState.Manage [Now_Select_Manage_Number].GetName () + "";
 
-		//¸g²z¯à¤O¶¥¯Å
+		//ç¶“ç†èƒ½åŠ›éšç´š
 		ManageNumber_Text.text = MainState.Manage[Now_Select_Manage_Number].GetAbility() + "";
 
-		//¸g²zÁ~¤ô
+		//ç¶“ç†è–ªæ°´
 		MainState.SetText_Pricey(MainState.Manage[Now_Select_Manage_Number].GetSalary() , ManageSalary_Text);
 
-		//¸g²z¦Û§Ú¤¶²Ğ
+		//ç¶“ç†è‡ªæˆ‘ä»‹ç´¹
 		ManageIntroduce_Text.text = MainState.Manage[Now_Select_Manage_Number].GetIntroduce() + "";
 
-		//¸g²z¹Ï¤ù
+		//ç¶“ç†åœ–ç‰‡
 		ManageImage.sprite = (Sprite)Resources.Load<Sprite>(MainState.Manage_Image_String[Now_Select_Manage_Number]);
 
-		//¸g²z¯à¤O¶¥¯Å¹Ï¤ù
+		//ç¶“ç†èƒ½åŠ›éšç´šåœ–ç‰‡
 		ManageNumber_Image.fillAmount = MainState.Manage[Now_Select_Manage_Number].GetAbility() / 5.0f;
 
-		//Äµ½Ã¦WºÙ
+		//è­¦è¡›åç¨±
 		SecurityName_Text.text = MainState.Security [Now_Select_Security_Number].GetName () + "";
 
-		//Äµ½Ã¯à¤O¶¥¯Å
+		//è­¦è¡›èƒ½åŠ›éšç´š
 		SecurityNumber_Text.text = MainState.Security[Now_Select_Security_Number].GetAbility() + "";
 
-		//Äµ½ÃÁ~¤ô
+		//è­¦è¡›è–ªæ°´
 		MainState.SetText_Pricey(MainState.Security[Now_Select_Security_Number].GetSalary() , SecuritySalary_Text);
 
-		//Äµ½Ã¦Û§Ú¤¶²Ğ
+		//è­¦è¡›è‡ªæˆ‘ä»‹ç´¹
 		SecurityIntroduce_Text.text = MainState.Security[Now_Select_Security_Number].GetIntroduce() + "";
 
-		//Äµ½Ã¹Ï¤ù
+		//è­¦è¡›åœ–ç‰‡
 		SecurityImage.sprite = (Sprite)Resources.Load<Sprite>(MainState.Security_Image_String[Now_Select_Security_Number]);
 
-		//Äµ½Ã¯à¤O¶¥¯Å¹Ï¤ù
+		//è­¦è¡›èƒ½åŠ›éšç´šåœ–ç‰‡
 		SecurityManageNumber_Image.fillAmount = MainState.Security[Now_Select_Security_Number].GetAbility() / 5.0f;
 
-		//ÁôÂÃ©±¾Qµe­±
+		//éš±è—åº—é‹ªç•«é¢
 		StoreBackGround.SetActive(false);
-		//ÁôÂÃ¿ï¾ÜÅU°İµe­±
+		//éš±è—é¸æ“‡é¡§å•ç•«é¢
 		ManageStore.SetActive(false);
-		//Åã¥Ü¤H­ûµe­±
+		//é¡¯ç¤ºäººå“¡ç•«é¢
 		ManagePeopleBackGround.SetActive(true);
-		//±N©±¾Q«ö¶s³]¬°¥i¥Î
+		//å°‡åº—é‹ªæŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 		StoreButton.interactable = true;
-		//¤H­û«ö¶s³]¬°¤£¥i¥Î
+		//äººå“¡æŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 		PeopleButton.interactable = false;
 
 	}
 
-	//°Æµ{¦¡:Åã¥Ü©±¾Qµe­±
+	//å‰¯ç¨‹å¼:é¡¯ç¤ºåº—é‹ªç•«é¢
 	public void Show_ManageStore(){
-		//¼½©ñ«ö¶s­µ®Ä
+		//æ’­æ”¾æŒ‰éˆ•éŸ³æ•ˆ
 		MainState.Button_Sounds_Play();
 
-		//ÁôÂÃ¤H­ûµe­±
+		//éš±è—äººå“¡ç•«é¢
 		ManagePeopleBackGround.SetActive(false);
-		//ÁôÂÃ¿ï¾ÜÅU°İµe­±
+		//éš±è—é¸æ“‡é¡§å•ç•«é¢
 		ManageStore.SetActive(false);
-		//Åã¥Ü©±¾Qµe­±
+		//é¡¯ç¤ºåº—é‹ªç•«é¢
 		StoreBackGround.SetActive (true);
-		//±N©±¾Q«ö¶s³]¬°¤£¥i¥Î
+		//å°‡åº—é‹ªæŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 		StoreButton.interactable = false;
-		//¤H­û«ö¶s³]¬°¥i¥Î
+		//äººå“¡æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 		PeopleButton.interactable = true;
 	}
 
-	//°Æµ{¦¡:Åã¥Ü¨M©wÅU°İµe­±
+	//å‰¯ç¨‹å¼:é¡¯ç¤ºæ±ºå®šé¡§å•ç•«é¢
 	public void Show_Accept_Decision(){
-		//¼½©ñPayBack­µ®Ä
+		//æ’­æ”¾PayBackéŸ³æ•ˆ
 		MainState.PayBack_Button_Sounds_Play();
 
-		//Åã¥Ü¨M©wÅU°İµe­±
+		//é¡¯ç¤ºæ±ºå®šé¡§å•ç•«é¢
 		Decision.SetActive (true);
-		//¤W¤@¦ì«ö¶s³]¬°¤£¥i¥Î
+		//ä¸Šä¸€ä½æŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 		PreviousButton.interactable = false;
-		//¤U¤@¦ì«ö¶s³]¬°¤£¥i¥Î
+		//ä¸‹ä¸€ä½æŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 		NextButton.interactable = false;
-		//½T©w§ë¸ê«ö¶s¬°¤£¥i¥Î
+		//ç¢ºå®šæŠ•è³‡æŒ‰éˆ•ç‚ºä¸å¯ç”¨
 		ManageInvestionButton.interactable = false;
-		//¨ú®ø§ë¸ê«ö¶s¬°¤£¥i¥Î
+		//å–æ¶ˆæŠ•è³‡æŒ‰éˆ•ç‚ºä¸å¯ç”¨
 		ManageCancelButton.interactable = false;
-		//scrollBar³]¬°¤£¥i¥Î
+		//scrollBarè¨­ç‚ºä¸å¯ç”¨
 		scrollbar.interactable = false;
-		//¬O¨M©wµe­±
+		//æ˜¯æ±ºå®šç•«é¢
 		DecisionBool = true;
 	}
 
-	//°Æµ{¦¡:Åã¥Ü¨ú®ø¿ï¾ÜÅU°İµe­±
+	//å‰¯ç¨‹å¼:é¡¯ç¤ºå–æ¶ˆé¸æ“‡é¡§å•ç•«é¢
 	public void Show_Cancel_ManageStore(){
-		//¼½©ñPayBack­µ®Ä
+		//æ’­æ”¾PayBackéŸ³æ•ˆ
 		MainState.PayBack_Button_Sounds_Play();
 
-		//ÁôÂÃ¿ï¾ÜÅU°İµe­±
+		//éš±è—é¸æ“‡é¡§å•ç•«é¢
 		ManageStore.SetActive(false);
 
-		//Â÷¶}«ö¶s³]¬°¥i¥Î
+		//é›¢é–‹æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 		LeftButton.interactable = true;
-		//©±¾Q«ö¶s³]¬°¤£¥i¥Î
+		//åº—é‹ªæŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 		StoreButton.interactable = false;
-		//¤H­û«ö¶s³]¬°¥i¥Î
+		//äººå“¡æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 		PeopleButton.interactable = true;
-		//scrollBar³]¬°¥i¥Î
+		//scrollBarè¨­ç‚ºå¯ç”¨
 		scrollbar.interactable = true;
-		//¤£¬O¨M©wµe­±
+		//ä¸æ˜¯æ±ºå®šç•«é¢
 		DecisionBool = false;
 
-		//±N¤w¾Ö¦³©±¾Qªº¸gÀç«ö¶s³]¬°¥i¥Î
+		//å°‡å·²æ“æœ‰åº—é‹ªçš„ç¶“ç‡ŸæŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 		for(int i=0; i<10; i++){
 			switch (Manage_Area_Number) {
-			    //ÄÑ¥]®v³Å
+			    //éºµåŒ…å¸«å‚…
 			case 0:
 				if(MainState.BreadStore[i].GetOwnBool()==true ) ManageButton [i].interactable = true;
 				break;
-				//­µ¼Ö¤H
+				//éŸ³æ¨‚äºº
 			case 1:
 				if(MainState.MusicStore[i].GetOwnBool()==true ) ManageButton [i].interactable = true;
 				break;
-				//¬ì§Ş·s¶Q
+				//ç§‘æŠ€æ–°è²´
 			case 2:
 				if(MainState.TehcnologyStore[i].GetOwnBool()==true ) ManageButton [i].interactable = true;
 				break;
-				//¾÷¤u
+				//æ©Ÿå·¥
 			case 3:
 				if(MainState.FactoryStore[i].GetOwnBool()==true ) ManageButton [i].interactable = true;
 				break;
-				//»È¦æ®a
+				//éŠ€è¡Œå®¶
 			case 4:
 				if(MainState.EconomicStore[i].GetOwnBool()==true ) ManageButton [i].interactable = true;
 				break;
@@ -697,31 +698,31 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:¨M©w§ë¸ê
+	//å‰¯ç¨‹å¼:æ±ºå®šæŠ•è³‡
 	public void Invest_Decision(){
-		//¼½©ñ«ù¦³ª÷¿úÅÜ§ó°Êµe
+		//æ’­æ”¾æŒæœ‰é‡‘éŒ¢è®Šæ›´å‹•ç•«
 		Own_Money_Change_Animation.Play();
 
-		//±N¤w¾Ö¦³©±¾Qªº¸gÀç«ö¶s³]¬°¥i¥Î====================================================================
+		//å°‡å·²æ“æœ‰åº—é‹ªçš„ç¶“ç‡ŸæŒ‰éˆ•è¨­ç‚ºå¯ç”¨====================================================================
 		for(int i=0; i<10; i++){
 			switch (Manage_Area_Number) {
-			//ÄÑ¥]®v³Å
+			//éºµåŒ…å¸«å‚…
 			case 0:
 				if(MainState.BreadStore[i].GetOwnBool()==true) ManageButton [i].interactable = true;
 				break;
-				//­µ¼Ö¤H
+				//éŸ³æ¨‚äºº
 			case 1:
 				if(MainState.MusicStore[i].GetOwnBool()==true) ManageButton [i].interactable = true;
 				break;
-				//¬ì§Ş·s¶Q
+				//ç§‘æŠ€æ–°è²´
 			case 2:
 				if(MainState.TehcnologyStore[i].GetOwnBool()==true) ManageButton [i].interactable = true;
 				break;
-				//¾÷¤u
+				//æ©Ÿå·¥
 			case 3:
 				if(MainState.FactoryStore[i].GetOwnBool()==true) ManageButton [i].interactable = true;
 				break;
-				//»È¦æ®a
+				//éŠ€è¡Œå®¶
 			case 4:
 				if(MainState.EconomicStore[i].GetOwnBool()==true) ManageButton [i].interactable = true;
 				break;
@@ -729,188 +730,188 @@ public class Manage : MonoBehaviour {
 			}//switch
 		}//for
 
-		//¶i¦æ§ë¸ê======================================================================================
+		//é€²è¡ŒæŠ•è³‡======================================================================================
 		switch (Manage_Area_Number) {
 
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//¼W¥[©±¾Q¸gÅç==============
-			//©±¾Q¤ÀÃş1:²i¶¹ 2:­µ¼Ö 3:¬ì§Ş 4:¾÷¤u 5:ª÷¿Ä
+			//å¢åŠ åº—é‹ªç¶“é©—==============
+			//åº—é‹ªåˆ†é¡1:çƒ¹é£ª 2:éŸ³æ¨‚ 3:ç§‘æŠ€ 4:æ©Ÿå·¥ 5:é‡‘è
 			if(MainState.BreadStore[Invest_Store_Number].GetClassification()==1){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:²i¶¹ªº¶¥¯Å)*30.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:çƒ¹é£ªçš„éšç´š)*30.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				//MainState.BreadStore [Invest_Store_Number].SetLevelEx ( MainState.BreadStore[Invest_Store_Number].GetLevelEx() + ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility() + MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber())*30.0f) /  MainState.BreadStore [Invest_Store_Number].GetLevel ());
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber())*30.0f) /  MainState.BreadStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.BreadStore[Invest_Store_Number].GetClassification()==2){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:­µ¼Öªº¶¥¯Å)*30.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:éŸ³æ¨‚çš„éšç´š)*30.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetMusicNumber())*30.0f)  /  MainState.BreadStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.BreadStore[Invest_Store_Number].GetClassification()==3){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¬ì§Şªº¶¥¯Å)*30.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:ç§‘æŠ€çš„éšç´š)*30.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetTechnologyNumber())*30.0f)  /  MainState.BreadStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.BreadStore[Invest_Store_Number].GetClassification()==4){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¾÷¤uªº¶¥¯Å)*30.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:æ©Ÿå·¥çš„éšç´š)*30.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetFactoryNumber())*30.0f)  /  MainState.BreadStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.BreadStore[Invest_Store_Number].GetClassification()==5){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:ª÷¿Äªº¶¥¯Å)*30.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:é‡‘èçš„éšç´š)*30.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetEconomicNumber())*30.0f)  /  MainState.BreadStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 				
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//¼W¥[©±¾Q¸gÅç==============
-			//©±¾Q¤ÀÃş1:²i¶¹ 2:­µ¼Ö 3:¬ì§Ş 4:¾÷¤u 5:ª÷¿Ä
+			//å¢åŠ åº—é‹ªç¶“é©—==============
+			//åº—é‹ªåˆ†é¡1:çƒ¹é£ª 2:éŸ³æ¨‚ 3:ç§‘æŠ€ 4:æ©Ÿå·¥ 5:é‡‘è
 			if(MainState.MusicStore[Invest_Store_Number].GetClassification()==1){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:²i¶¹ªº¶¥¯Å)*25.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:çƒ¹é£ªçš„éšç´š)*25.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				//MainState.MusicStore [Invest_Store_Number].SetLevelEx ( MainState.MusicStore[Invest_Store_Number].GetLevelEx() + ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility() + MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber())*25.0f) /  MainState.MusicStore [Invest_Store_Number].GetLevel ());
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant [Now_Select_Consultant_Number].GetAbility ()*2 + MainState.Consultant [Now_Select_Consultant_Number].GetFoodNumber ()) * 25.0f) / MainState.MusicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.MusicStore[Invest_Store_Number].GetClassification()==2){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:­µ¼Öªº¶¥¯Å)*25.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:éŸ³æ¨‚çš„éšç´š)*25.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetMusicNumber())*25.0f)  /  MainState.MusicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.MusicStore[Invest_Store_Number].GetClassification()==3){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¬ì§Şªº¶¥¯Å)*25.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:ç§‘æŠ€çš„éšç´š)*25.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetTechnologyNumber())*25.0f)  /  MainState.MusicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.MusicStore[Invest_Store_Number].GetClassification()==4){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¾÷¤uªº¶¥¯Å)*25.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:æ©Ÿå·¥çš„éšç´š)*25.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetFactoryNumber())*25.0f)  /  MainState.MusicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.MusicStore[Invest_Store_Number].GetClassification()==5){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:ª÷¿Äªº¶¥¯Å)*25.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:é‡‘èçš„éšç´š)*25.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetEconomicNumber())*25.0f)  /  MainState.MusicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 				
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//¼W¥[©±¾Q¸gÅç==============
-			//©±¾Q¤ÀÃş1:²i¶¹ 2:­µ¼Ö 3:¬ì§Ş 4:¾÷¤u 5:ª÷¿Ä
+			//å¢åŠ åº—é‹ªç¶“é©—==============
+			//åº—é‹ªåˆ†é¡1:çƒ¹é£ª 2:éŸ³æ¨‚ 3:ç§‘æŠ€ 4:æ©Ÿå·¥ 5:é‡‘è
 			if(MainState.TehcnologyStore[Invest_Store_Number].GetClassification()==1){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:²i¶¹ªº¶¥¯Å)*20.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:çƒ¹é£ªçš„éšç´š)*20.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				//MainState.TehcnologyStore [Invest_Store_Number].SetLevelEx ( MainState.TehcnologyStore[Invest_Store_Number].GetLevelEx() + ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility() + MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber())*20.0f) /  MainState.TehcnologyStore [Invest_Store_Number].GetLevel ());
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber())*20.0f) /  MainState.TehcnologyStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.TehcnologyStore[Invest_Store_Number].GetClassification()==2){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:­µ¼Öªº¶¥¯Å)*20.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:éŸ³æ¨‚çš„éšç´š)*20.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetMusicNumber())*20.0f)  /  MainState.TehcnologyStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.TehcnologyStore[Invest_Store_Number].GetClassification()==3){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¬ì§Şªº¶¥¯Å)*20.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:ç§‘æŠ€çš„éšç´š)*20.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetTechnologyNumber())*20.0f)  /  MainState.TehcnologyStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.TehcnologyStore[Invest_Store_Number].GetClassification()==4){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¾÷¤uªº¶¥¯Å)*20.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:æ©Ÿå·¥çš„éšç´š)*20.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetFactoryNumber())*20.0f)  /  MainState.TehcnologyStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.TehcnologyStore[Invest_Store_Number].GetClassification()==5){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:ª÷¿Äªº¶¥¯Å)*20.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:é‡‘èçš„éšç´š)*20.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetEconomicNumber())*20.0f)  /  MainState.TehcnologyStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//¼W¥[©±¾Q¸gÅç==============
-			//©±¾Q¤ÀÃş1:²i¶¹ 2:­µ¼Ö 3:¬ì§Ş 4:¾÷¤u 5:ª÷¿Ä
+			//å¢åŠ åº—é‹ªç¶“é©—==============
+			//åº—é‹ªåˆ†é¡1:çƒ¹é£ª 2:éŸ³æ¨‚ 3:ç§‘æŠ€ 4:æ©Ÿå·¥ 5:é‡‘è
 			if(MainState.FactoryStore[Invest_Store_Number].GetClassification()==1){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:²i¶¹ªº¶¥¯Å)*17.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:çƒ¹é£ªçš„éšç´š)*17.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				//MainState.FactoryStore [Invest_Store_Number].SetLevelEx ( MainState.FactoryStore[Invest_Store_Number].GetLevelEx() + ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility() + MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber())*17.0f) /  MainState.FactoryStore [Invest_Store_Number].GetLevel ());
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber())*17.0f) /  MainState.FactoryStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.FactoryStore[Invest_Store_Number].GetClassification()==2){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:­µ¼Öªº¶¥¯Å)*17.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:éŸ³æ¨‚çš„éšç´š)*17.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetMusicNumber())*17.0f)  /  MainState.FactoryStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.FactoryStore[Invest_Store_Number].GetClassification()==3){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¬ì§Şªº¶¥¯Å)*17.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:ç§‘æŠ€çš„éšç´š)*17.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetTechnologyNumber())*17.0f)  /  MainState.FactoryStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.FactoryStore[Invest_Store_Number].GetClassification()==4){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¾÷¤uªº¶¥¯Å)*17.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:æ©Ÿå·¥çš„éšç´š)*17.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetFactoryNumber())*17.0f)  /  MainState.FactoryStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.FactoryStore[Invest_Store_Number].GetClassification()==5){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:ª÷¿Äªº¶¥¯Å)*17.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:é‡‘èçš„éšç´š)*17.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetEconomicNumber())*17.0f)  /  MainState.FactoryStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 				
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//¼W¥[©±¾Q¸gÅç==============
-			//©±¾Q¤ÀÃş1:²i¶¹ 2:­µ¼Ö 3:¬ì§Ş 4:¾÷¤u 5:ª÷¿Ä
+			//å¢åŠ åº—é‹ªç¶“é©—==============
+			//åº—é‹ªåˆ†é¡1:çƒ¹é£ª 2:éŸ³æ¨‚ 3:ç§‘æŠ€ 4:æ©Ÿå·¥ 5:é‡‘è
 			if(MainState.EconomicStore[Invest_Store_Number].GetClassification()==1){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:²i¶¹ªº¶¥¯Å)*14.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:çƒ¹é£ªçš„éšç´š)*14.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				//MainState.EconomicStore [Invest_Store_Number].SetLevelEx ( MainState.EconomicStore[Invest_Store_Number].GetLevelEx() + ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility() + MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber())*14.0f) /  MainState.EconomicStore [Invest_Store_Number].GetLevel ());
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber())*14.0f) /  MainState.EconomicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.EconomicStore[Invest_Store_Number].GetClassification()==2){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:­µ¼Öªº¶¥¯Å)*14.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:éŸ³æ¨‚çš„éšç´š)*14.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetMusicNumber())*14.0f)  /  MainState.EconomicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}
 			else if(MainState.EconomicStore[Invest_Store_Number].GetClassification()==3){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¬ì§Şªº¶¥¯Å)*14.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:ç§‘æŠ€çš„éšç´š)*14.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetTechnologyNumber())*14.0f)  /  MainState.EconomicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.EconomicStore[Invest_Store_Number].GetClassification()==4){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:¾÷¤uªº¶¥¯Å)*14.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:æ©Ÿå·¥çš„éšç´š)*14.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetFactoryNumber())*14.0f)  /  MainState.EconomicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
 			}	
 			else if(MainState.EconomicStore[Invest_Store_Number].GetClassification()==5){
-				//©±¾Q¸gÅç = ­ì¥»©±¾Q¸gÅç + (((ÅU°İ¯à¤O¶¥¯Å + ÅU°İ¤ä´©¯à¤O:ª÷¿Äªº¶¥¯Å)*14.0f)) / ²{¦b©±çEµ¥¯Å
+				//åº—é‹ªç¶“é©— = åŸæœ¬åº—é‹ªç¶“é©— + (((é¡§å•èƒ½åŠ›éšç´š + é¡§å•æ”¯æ´èƒ½åŠ›:é‡‘èçš„éšç´š)*14.0f)) / ç¾åœ¨åº—èˆ–ç­‰ç´š
 				LevelEx_Bool = true;
 				LevelEx_Temp = ((MainState.Consultant[Now_Select_Consultant_Number].GetAbility()*2 + MainState.Consultant[Now_Select_Consultant_Number].GetEconomicNumber())*14.0f)  /  MainState.EconomicStore [Invest_Store_Number].GetLevel ();
 				LevelEx_ADD(Invest_Store_Number);
@@ -920,99 +921,99 @@ public class Manage : MonoBehaviour {
 
 		}//switch
 			
-		//¼½©ñ¸gÅç­È´£¤É­µ®Ä
+		//æ’­æ”¾ç¶“é©—å€¼æå‡éŸ³æ•ˆ
 		MainState.LevelEx_Button_Sounds_Play();
 
-		//¦©°£«ù¦³ª÷¿ú
+		//æ‰£é™¤æŒæœ‰é‡‘éŒ¢
 		MainState.SUB_OwnMoney(MainState.Consultant[Now_Select_Consultant_Number].GetSalary() , OwnMoney_Text);
 
 	}
-	//°Æµ{¦¡:ÁôÂÃ¨M©wµe­±
+	//å‰¯ç¨‹å¼:éš±è—æ±ºå®šç•«é¢
 	public void Show_Cancel_Decision(){
-		//¼½©ñPayBack­µ®Ä
+		//æ’­æ”¾PayBackéŸ³æ•ˆ
 		MainState.PayBack_Button_Sounds_Play();
 
-		//ÁôÂÃ¨M©wÅU°İµe­±
+		//éš±è—æ±ºå®šé¡§å•ç•«é¢
 		Decision.SetActive(false);
-		//¤W¤@¦ì«ö¶s³]¬°¥i¥Î
+		//ä¸Šä¸€ä½æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 		PreviousButton.interactable = true;
-		//¤U¤@¦ì«ö¶s³]¬°¥i¥Î
+		//ä¸‹ä¸€ä½æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 		NextButton.interactable = true;
-		//½T©w§ë¸ê«ö¶s¬°¥i¥Î
+		//ç¢ºå®šæŠ•è³‡æŒ‰éˆ•ç‚ºå¯ç”¨
 		ManageInvestionButton.interactable = true;
-		//¨ú®ø§ë¸ê«ö¶s¬°¥i¥Î
+		//å–æ¶ˆæŠ•è³‡æŒ‰éˆ•ç‚ºå¯ç”¨
 		ManageCancelButton.interactable = true;
-		//scrollBar³]¬°¤£¥i¥Î
+		//scrollBarè¨­ç‚ºä¸å¯ç”¨
 		scrollbar.interactable = false;
-		//¬O¨M©wµe­±
+		//æ˜¯æ±ºå®šç•«é¢
 		DecisionBool = true;
 	}
 
-	//°Æµ{¦¡:¥Î¸gÀç«ö¶s³]©wÅU°İText
+	//å‰¯ç¨‹å¼:ç”¨ç¶“ç‡ŸæŒ‰éˆ•è¨­å®šé¡§å•Text
 	public void Set_Manage_Consultant_Text(int StoreNumber){
-		//Åã¥ÜÅU°İ¿ï¾Ü
+		//é¡¯ç¤ºé¡§å•é¸æ“‡
 		ManageStore.SetActive(true);
 
-		//¼½©ñPayBack­µ®Ä
+		//æ’­æ”¾PayBackéŸ³æ•ˆ
 		MainState.PayBack_Button_Sounds_Play();
 
-		//¼½©ñÅU°İ¿ï¾Ü°Êµe
+		//æ’­æ”¾é¡§å•é¸æ“‡å‹•ç•«
 		ConsultantBackGround_Animation.Play();
 
-		//³]©w§ë¸ê©±¾Q½s¸¹
+		//è¨­å®šæŠ•è³‡åº—é‹ªç·¨è™Ÿ
 		Invest_Store_Number = StoreNumber;
 
-		//ÅU°İ¦WºÙ
+		//é¡§å•åç¨±
 		ConsultantName_Text.text = MainState.Consultant [Now_Select_Consultant_Number].GetName () + "";
 
-		//ÅU°İ¯à¤O¶¥¯Å
+		//é¡§å•èƒ½åŠ›éšç´š
 		ConsultantAdvantage_Text.text = MainState.Consultant[Now_Select_Consultant_Number].GetAbility() + "";
-		//ÅU°İ¯à¤O¶¥¯Å¹Ï¤ù
+		//é¡§å•èƒ½åŠ›éšç´šåœ–ç‰‡
 		ConsultantManageNumber_Image.fillAmount = MainState.Consultant[Now_Select_Consultant_Number].GetAbility() / 5.0f;
 
-		//¤ä´©¯à¤O
+		//æ”¯æ´èƒ½åŠ›
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber() , AdvantageNumber1_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetMusicNumber() , AdvantageNumber2_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetTechnologyNumber() , AdvantageNumber3_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetFactoryNumber() , AdvantageNumber4_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetEconomicNumber() , AdvantageNumber5_Text);
 
-		//Á~¤ô
+		//è–ªæ°´
 		MainState.SetText_Pricey(MainState.Consultant[Now_Select_Consultant_Number].GetSalary() , ConsultantSalary_Text);
 
-		//Â÷¶}«ö¶s³]¬°¤£¥i¥Î
+		//é›¢é–‹æŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 		LeftButton.interactable = false;
-		//©±¾Q«ö¶s³]¬°¤£¥i¥Î
+		//åº—é‹ªæŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 		StoreButton.interactable = false;
-		//¤H­û«ö¶s³]¬°¤£¥i¥Î
+		//äººå“¡æŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 		PeopleButton.interactable = false;
-		//scrollBar³]¬°¤£¥i¥Î
+		//scrollBarè¨­ç‚ºä¸å¯ç”¨
 		scrollbar.interactable = false;
-		//¬O¨M©wµe­±
+		//æ˜¯æ±ºå®šç•«é¢
 		DecisionBool = true;
 
-		//§PÂ_«ù¦³ª÷¿ú¦³¨S¦³¤j©óÅU°İÁ~¤ô¡A¦³«h§ë¸ê«ö¶s¬°¥i¥Î ¨S¦³«h§ë¸ê«ö¶s¬°¤£¥i¥Î
+		//åˆ¤æ–·æŒæœ‰é‡‘éŒ¢æœ‰æ²’æœ‰å¤§æ–¼é¡§å•è–ªæ°´ï¼Œæœ‰å‰‡æŠ•è³‡æŒ‰éˆ•ç‚ºå¯ç”¨ æ²’æœ‰å‰‡æŠ•è³‡æŒ‰éˆ•ç‚ºä¸å¯ç”¨
 		if(MainState.OwnMoney >= MainState.Consultant[Now_Select_Consultant_Number].GetSalary()) ManageInvestionButton.interactable = true;
 		else ManageInvestionButton.interactable = false;
 
-		//±N¸gÀç«ö¶s³£³]¬°¤£¥i¥Î
+		//å°‡ç¶“ç‡ŸæŒ‰éˆ•éƒ½è¨­ç‚ºä¸å¯ç”¨
 		for(int i=0; i<10; i++){
 			ManageButton [i].interactable = false;
 		}
 
-		//ÅU°İ¹Ï¤ù
+		//é¡§å•åœ–ç‰‡
 		ConsultantImage.sprite = (Sprite)Resources.Load<Sprite>(MainState.Consultant_Image_String[Now_Select_Consultant_Number]);
 
 	}
 
-	//°Æµ{¦¡(¤W¤@¦ì«ö¶s):³]©w¸g²zText
+	//å‰¯ç¨‹å¼(ä¸Šä¸€ä½æŒ‰éˆ•):è¨­å®šç¶“ç†Text
 	public void Set_Previous_Manage_Text(){
-		//¼½©ñ«ö¶s­µ®Ä
+		//æ’­æ”¾æŒ‰éˆ•éŸ³æ•ˆ
 		MainState.Button_Sounds_Play();
 
-		//¦pªG¬O¤£¬O¤w¶±¥Î³Ì¤p½s¸¹
+		//å¦‚æœæ˜¯ä¸æ˜¯å·²é›‡ç”¨æœ€å°ç·¨è™Ÿ
 		if (Now_Select_Manage_Number != 0) {
-			//§ä¥X¤w¶±¥Îªº¸g²z½s¸¹
+			//æ‰¾å‡ºå·²é›‡ç”¨çš„ç¶“ç†ç·¨è™Ÿ
 			for (int i = Now_Select_Manage_Number - 1; i >= 0; i--) {
 				if (MainState.Manage [i].GetHire ()) {
 					Now_Select_Manage_Number = i;
@@ -1020,39 +1021,39 @@ public class Manage : MonoBehaviour {
 				}
 			}
 		}
-		//¦pªG¬O¤w¶±¥Î³Ì¤p½s¸¹¡A¦^¨ì¤w¶±¥Î³Ì¤j½s¸¹¸g²z
+		//å¦‚æœæ˜¯å·²é›‡ç”¨æœ€å°ç·¨è™Ÿï¼Œå›åˆ°å·²é›‡ç”¨æœ€å¤§ç·¨è™Ÿç¶“ç†
 		else{
 			Now_Select_Manage_Number = Now_Max_Manage_Number;
 		}
 
-		//¸g²z¦WºÙ
+		//ç¶“ç†åç¨±
 		ManageName_Text.text = MainState.Manage [Now_Select_Manage_Number].GetName () + "";
 
-		//¸g²z¯à¤O¶¥¯Å
+		//ç¶“ç†èƒ½åŠ›éšç´š
 		ManageNumber_Text.text = MainState.Manage[Now_Select_Manage_Number].GetAbility() + "";
 
-		//¸g²z
+		//ç¶“ç†
 		MainState.SetText_Pricey(MainState.Manage[Now_Select_Manage_Number].GetSalary() , ManageSalary_Text);
 
-		//¸g²z¹Ï¤ù
+		//ç¶“ç†åœ–ç‰‡
 		ManageImage.sprite = (Sprite)Resources.Load<Sprite>(MainState.Manage_Image_String[Now_Select_Manage_Number]);
 
-		//¸g²z¯à¤O¶¥¯Å¹Ï¤ù
+		//ç¶“ç†èƒ½åŠ›éšç´šåœ–ç‰‡
 		ManageNumber_Image.fillAmount = MainState.Manage[Now_Select_Manage_Number].GetAbility() / 5.0f;
 
-		//¸g²z¦Û§Ú¤¶²Ğ
+		//ç¶“ç†è‡ªæˆ‘ä»‹ç´¹
 		ManageIntroduce_Text.text = MainState.Manage[Now_Select_Manage_Number].GetIntroduce() + "";
 
 	}
 
-	//°Æµ{¦¡(¤W¤@¦ì«ö¶s):³]©wÄµ½ÃText
+	//å‰¯ç¨‹å¼(ä¸Šä¸€ä½æŒ‰éˆ•):è¨­å®šè­¦è¡›Text
 	public void Set_Previous_Security_Text(){
-		//¼½©ñ«ö¶s­µ®Ä
+		//æ’­æ”¾æŒ‰éˆ•éŸ³æ•ˆ
 		MainState.Button_Sounds_Play();
 
-		//¦pªG¬O¤£¬O¤w¶±¥Î³Ì¤p½s¸¹
+		//å¦‚æœæ˜¯ä¸æ˜¯å·²é›‡ç”¨æœ€å°ç·¨è™Ÿ
 		if (Now_Select_Security_Number != 0) {
-			//§ä¥X¤w¶±¥ÎªºÄµ½Ã½s¸¹
+			//æ‰¾å‡ºå·²é›‡ç”¨çš„è­¦è¡›ç·¨è™Ÿ
 			for (int i = Now_Select_Security_Number - 1; i >= 0; i--) {
 				if (MainState.Security [i].GetHire ()) {
 					Now_Select_Security_Number = i;
@@ -1060,39 +1061,39 @@ public class Manage : MonoBehaviour {
 				}
 			}
 		}
-		//¦pªG¬O¤w¶±¥Î³Ì¤p½s¸¹¡A¦^¨ì¤w¶±¥Î³Ì¤j½s¸¹Äµ½Ã
+		//å¦‚æœæ˜¯å·²é›‡ç”¨æœ€å°ç·¨è™Ÿï¼Œå›åˆ°å·²é›‡ç”¨æœ€å¤§ç·¨è™Ÿè­¦è¡›
 		else{
 			Now_Select_Security_Number = Now_Max_Security_Number;
 		}
 
-		//Äµ½Ã¦WºÙ
+		//è­¦è¡›åç¨±
 		SecurityName_Text.text = MainState.Security[Now_Select_Security_Number].GetName () + "";
 
-		//Äµ½Ã¯à¤O¶¥¯Å
+		//è­¦è¡›èƒ½åŠ›éšç´š
 		SecurityNumber_Text.text = MainState.Security[Now_Select_Security_Number].GetAbility() + "";
 
-		//Äµ½Ã
+		//è­¦è¡›
 		MainState.SetText_Pricey(MainState.Security[Now_Select_Security_Number].GetSalary() , SecuritySalary_Text);
 
-		//Äµ½Ã¹Ï¤ù
+		//è­¦è¡›åœ–ç‰‡
 		SecurityImage.sprite = (Sprite)Resources.Load<Sprite>(MainState.Security_Image_String[Now_Select_Security_Number]);
 
-		//Äµ½Ã¯à¤O¶¥¯Å¹Ï¤ù
+		//è­¦è¡›èƒ½åŠ›éšç´šåœ–ç‰‡
 		SecurityManageNumber_Image.fillAmount = MainState.Security[Now_Select_Security_Number].GetAbility() / 5.0f;
 
-		//Äµ½Ã¦Û§Ú¤¶²Ğ
+		//è­¦è¡›è‡ªæˆ‘ä»‹ç´¹
 		SecurityIntroduce_Text.text = MainState.Security[Now_Select_Security_Number].GetIntroduce() + "";
 
 	}
 
-	//°Æµ{¦¡(¤W¤@¦ì«ö¶s):³]©wÅU°İText
+	//å‰¯ç¨‹å¼(ä¸Šä¸€ä½æŒ‰éˆ•):è¨­å®šé¡§å•Text
 	public void Set_Previous_Consultant_Text(){
-		//¼½©ñ«ö¶s­µ®Ä
+		//æ’­æ”¾æŒ‰éˆ•éŸ³æ•ˆ
 		MainState.Button_Sounds_Play();
 
-		//¦pªG¬O¤£¬O¤w¶±¥Î³Ì¤p½s¸¹
+		//å¦‚æœæ˜¯ä¸æ˜¯å·²é›‡ç”¨æœ€å°ç·¨è™Ÿ
 		if (Now_Select_Consultant_Number != 0) {
-			//§ä¥X¤w¶±¥ÎªºÅU°İ½s¸¹
+			//æ‰¾å‡ºå·²é›‡ç”¨çš„é¡§å•ç·¨è™Ÿ
 			for (int i = Now_Select_Consultant_Number - 1; i >= 0; i--) {
 				if (MainState.Consultant [i].GetHire ()) {
 					Now_Select_Consultant_Number = i;
@@ -1100,49 +1101,49 @@ public class Manage : MonoBehaviour {
 				}
 			}
 		}
-		//¦pªG¬O¤w¶±¥Î³Ì¤p½s¸¹¡A¦^¨ì¤w¶±¥Î³Ì¤j½s¸¹ÅU°İ
+		//å¦‚æœæ˜¯å·²é›‡ç”¨æœ€å°ç·¨è™Ÿï¼Œå›åˆ°å·²é›‡ç”¨æœ€å¤§ç·¨è™Ÿé¡§å•
 		else{
 			Now_Select_Consultant_Number = Now_Max_Consultant_Number;
 		}
 
-		//ÅU°İ¦WºÙ
+		//é¡§å•åç¨±
 		ConsultantName_Text.text = MainState.Consultant [Now_Select_Consultant_Number].GetName () + "";
 
-		//ÅU°İ¯à¤O¶¥¯Å
+		//é¡§å•èƒ½åŠ›éšç´š
 		ConsultantAdvantage_Text.text = MainState.Consultant[Now_Select_Consultant_Number].GetAbility() + "";
-		//ÅU°İ¯à¤O¶¥¯Å¹Ï¤ù
+		//é¡§å•èƒ½åŠ›éšç´šåœ–ç‰‡
 		ConsultantManageNumber_Image.fillAmount = MainState.Consultant[Now_Select_Consultant_Number].GetAbility() / 5.0f;
 
-		//¤ä´©¯à¤O
+		//æ”¯æ´èƒ½åŠ›
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber() , AdvantageNumber1_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetMusicNumber() , AdvantageNumber2_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetTechnologyNumber() , AdvantageNumber3_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetFactoryNumber() , AdvantageNumber4_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetEconomicNumber() , AdvantageNumber5_Text);
 
-		//¤ä´©¯à¤OÃC¦â
+		//æ”¯æ´èƒ½åŠ›é¡è‰²
 		AdvantageNumber_Color();
 
-		//Á~¤ô
+		//è–ªæ°´
 		MainState.SetText_Pricey(MainState.Consultant[Now_Select_Consultant_Number].GetSalary() , ConsultantSalary_Text);
 
-		//§PÂ_«ù¦³ª÷¿ú¦³¨S¦³¤j©óÅU°İÁ~¤ô¡A¦³«h§ë¸ê«ö¶s¬°¥i¥Î ¨S¦³«h§ë¸ê«ö¶s¬°¤£¥i¥Î
+		//åˆ¤æ–·æŒæœ‰é‡‘éŒ¢æœ‰æ²’æœ‰å¤§æ–¼é¡§å•è–ªæ°´ï¼Œæœ‰å‰‡æŠ•è³‡æŒ‰éˆ•ç‚ºå¯ç”¨ æ²’æœ‰å‰‡æŠ•è³‡æŒ‰éˆ•ç‚ºä¸å¯ç”¨
 		if(MainState.OwnMoney >= MainState.Consultant[Now_Select_Consultant_Number].GetSalary()) ManageInvestionButton.interactable = true;
 		else ManageInvestionButton.interactable = false;
 
-		//ÅU°İ¹Ï¤ù
+		//é¡§å•åœ–ç‰‡
 		ConsultantImage.sprite = (Sprite)Resources.Load<Sprite>(MainState.Consultant_Image_String[Now_Select_Consultant_Number]);
 
 	}
 
-	//°Æµ{¦¡(¤U¤@¦ì«ö¶s):³]©w¸g²zText
+	//å‰¯ç¨‹å¼(ä¸‹ä¸€ä½æŒ‰éˆ•):è¨­å®šç¶“ç†Text
 	public void Set_Next_Manage_Text(){
-		//¼½©ñ«ö¶s­µ®Ä
+		//æ’­æ”¾æŒ‰éˆ•éŸ³æ•ˆ
 		MainState.Button_Sounds_Play();
 
-		//¦pªG¬O¤£¬O¤w¶±¥Î³Ì¤j½s¸¹
+		//å¦‚æœæ˜¯ä¸æ˜¯å·²é›‡ç”¨æœ€å¤§ç·¨è™Ÿ
 		if (Now_Select_Manage_Number != Now_Max_Manage_Number) {
-			//§ä¥X¤w¶±¥Îªº¸g²z½s¸¹
+			//æ‰¾å‡ºå·²é›‡ç”¨çš„ç¶“ç†ç·¨è™Ÿ
 			for (int i = Now_Select_Manage_Number + 1; i < MainState.ManageNumber; i++) {
 				if (MainState.Manage [i].GetHire ()) {
 					Now_Select_Manage_Number = i;
@@ -1150,39 +1151,39 @@ public class Manage : MonoBehaviour {
 				}
 			}
 		}
-		//¦pªG¬O¤w¶±¥Î³Ì¤j½s¸¹¡A¦^¨ì²Ä1¦ì¸g²z
+		//å¦‚æœæ˜¯å·²é›‡ç”¨æœ€å¤§ç·¨è™Ÿï¼Œå›åˆ°ç¬¬1ä½ç¶“ç†
 		else{
 			Now_Select_Manage_Number = 0;
 		}
 
-		//¸g²z¦WºÙ
+		//ç¶“ç†åç¨±
 		ManageName_Text.text = MainState.Manage [Now_Select_Manage_Number].GetName () + "";
 
-		//¸g²z¯à¤O¶¥¯Å
+		//ç¶“ç†èƒ½åŠ›éšç´š
 		ManageNumber_Text.text = MainState.Manage[Now_Select_Manage_Number].GetAbility() + "";
 
-		//¸g²zÁ~¤ô
+		//ç¶“ç†è–ªæ°´
 		MainState.SetText_Pricey(MainState.Manage[Now_Select_Manage_Number].GetSalary() , ManageSalary_Text);
 
-		//¸g²z¹Ï¤ù
+		//ç¶“ç†åœ–ç‰‡
 		ManageImage.sprite = (Sprite)Resources.Load<Sprite>(MainState.Manage_Image_String[Now_Select_Manage_Number]);
 
-		//¸g²z¯à¤O¶¥¯Å¹Ï¤ù
+		//ç¶“ç†èƒ½åŠ›éšç´šåœ–ç‰‡
 		ManageNumber_Image.fillAmount = MainState.Manage[Now_Select_Manage_Number].GetAbility() / 5.0f;
 
-		//¸g²z¦Û§Ú¤¶²Ğ
+		//ç¶“ç†è‡ªæˆ‘ä»‹ç´¹
 		ManageIntroduce_Text.text = MainState.Manage[Now_Select_Manage_Number].GetIntroduce() + "";
 
 	}
 
-	//°Æµ{¦¡(¤U¤@¦ì«ö¶s):³]©wÄµ½ÃText
+	//å‰¯ç¨‹å¼(ä¸‹ä¸€ä½æŒ‰éˆ•):è¨­å®šè­¦è¡›Text
 	public void Set_Next_Security_Text(){
-		//¼½©ñ«ö¶s­µ®Ä
+		//æ’­æ”¾æŒ‰éˆ•éŸ³æ•ˆ
 		MainState.Button_Sounds_Play();
 
-		//¦pªG¬O¤£¬O¤w¶±¥Î³Ì¤j½s¸¹
+		//å¦‚æœæ˜¯ä¸æ˜¯å·²é›‡ç”¨æœ€å¤§ç·¨è™Ÿ
 		if (Now_Select_Security_Number != Now_Max_Security_Number) {
-			//§ä¥X¤w¶±¥ÎªºÄµ½Ã½s¸¹
+			//æ‰¾å‡ºå·²é›‡ç”¨çš„è­¦è¡›ç·¨è™Ÿ
 			for (int i = Now_Select_Security_Number + 1; i < MainState.SecurityNumber; i++) {
 				if (MainState.Security [i].GetHire ()) {
 					Now_Select_Security_Number = i;
@@ -1190,40 +1191,40 @@ public class Manage : MonoBehaviour {
 				}
 			}
 		}
-		//¦pªG¬O¤w¶±¥Î³Ì¤j½s¸¹¡A¦^¨ì²Ä1¦ìÄµ½Ã
+		//å¦‚æœæ˜¯å·²é›‡ç”¨æœ€å¤§ç·¨è™Ÿï¼Œå›åˆ°ç¬¬1ä½è­¦è¡›
 		else{
 			Now_Select_Security_Number = 0;
 		}
 
-		//Äµ½Ã¦WºÙ
+		//è­¦è¡›åç¨±
 		SecurityName_Text.text = MainState.Security [Now_Select_Security_Number].GetName () + "";
 
-		//Äµ½Ã¯à¤O¶¥¯Å
+		//è­¦è¡›èƒ½åŠ›éšç´š
 		SecurityNumber_Text.text = MainState.Security[Now_Select_Security_Number].GetAbility() + "";
 
-		//Äµ½ÃÁ~¤ô
+		//è­¦è¡›è–ªæ°´
 		MainState.SetText_Pricey(MainState.Security[Now_Select_Security_Number].GetSalary() , SecuritySalary_Text);
 
-		//Äµ½Ã¹Ï¤ù
+		//è­¦è¡›åœ–ç‰‡
 		SecurityImage.sprite = (Sprite)Resources.Load<Sprite>(MainState.Security_Image_String[Now_Select_Security_Number]);
 
-		//Äµ½Ã¯à¤O¶¥¯Å¹Ï¤ù
+		//è­¦è¡›èƒ½åŠ›éšç´šåœ–ç‰‡
 		SecurityManageNumber_Image.fillAmount = MainState.Security[Now_Select_Security_Number].GetAbility() / 5.0f;
 
-		//Äµ½Ã¦Û§Ú¤¶²Ğ
+		//è­¦è¡›è‡ªæˆ‘ä»‹ç´¹
 		SecurityIntroduce_Text.text = MainState.Security[Now_Select_Security_Number].GetIntroduce() + "";
 
 	}
 
 
-	//°Æµ{¦¡(¤U¤@¦ì«ö¶s):³]©wÅU°İ
+	//å‰¯ç¨‹å¼(ä¸‹ä¸€ä½æŒ‰éˆ•):è¨­å®šé¡§å•
 	public void Set_Next_Consultant_Text(){
-		//¼½©ñ«ö¶s­µ®Ä
+		//æ’­æ”¾æŒ‰éˆ•éŸ³æ•ˆ
 		MainState.Button_Sounds_Play();
 
-		//¦pªG¬O¤£¬O¤w¶±¥Î³Ì¤j½s¸¹
+		//å¦‚æœæ˜¯ä¸æ˜¯å·²é›‡ç”¨æœ€å¤§ç·¨è™Ÿ
 		if (Now_Select_Consultant_Number != Now_Max_Consultant_Number) {
-			//§ä¥X¤w¶±¥ÎªºÅU°İ½s¸¹
+			//æ‰¾å‡ºå·²é›‡ç”¨çš„é¡§å•ç·¨è™Ÿ
 			for (int i = Now_Select_Consultant_Number + 1; i < MainState.ConsultantNumber; i++) {
 				if (MainState.Consultant [i].GetHire ()) {
 					Now_Select_Consultant_Number = i;
@@ -1231,45 +1232,45 @@ public class Manage : MonoBehaviour {
 				}
 			}
 		}
-		//¦pªG¬O¤w¶±¥Î³Ì¤j½s¸¹¡A¦^¨ì²Ä1¦ìÅU°İ
+		//å¦‚æœæ˜¯å·²é›‡ç”¨æœ€å¤§ç·¨è™Ÿï¼Œå›åˆ°ç¬¬1ä½é¡§å•
 		else{
 			Now_Select_Consultant_Number = 0;
 		}
 
-		//ÅU°İ¦WºÙ
+		//é¡§å•åç¨±
 		ConsultantName_Text.text = MainState.Consultant [Now_Select_Consultant_Number].GetName () + "";
 
-		//ÅU°İ¯à¤O¶¥¯Å
+		//é¡§å•èƒ½åŠ›éšç´š
 		ConsultantAdvantage_Text.text = MainState.Consultant[Now_Select_Consultant_Number].GetAbility() + "";
-		//ÅU°İ¯à¤O¶¥¯Å¹Ï¤ù
+		//é¡§å•èƒ½åŠ›éšç´šåœ–ç‰‡
 		ConsultantManageNumber_Image.fillAmount = MainState.Consultant[Now_Select_Consultant_Number].GetAbility() / 5.0f;
 
-		//¤ä´©¯à¤O
+		//æ”¯æ´èƒ½åŠ›
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetFoodNumber() , AdvantageNumber1_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetMusicNumber() , AdvantageNumber2_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetTechnologyNumber() , AdvantageNumber3_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetFactoryNumber() , AdvantageNumber4_Text);
 		MainState.Consultant_Advantage(MainState.Consultant[Now_Select_Consultant_Number].GetEconomicNumber() , AdvantageNumber5_Text);
 
-		//¤ä´©¯à¤OÃC¦â
+		//æ”¯æ´èƒ½åŠ›é¡è‰²
 		AdvantageNumber_Color();
 
-		//Á~¤ô
+		//è–ªæ°´
 		MainState.SetText_Pricey(MainState.Consultant[Now_Select_Consultant_Number].GetSalary() , ConsultantSalary_Text);
 
-		//§PÂ_«ù¦³ª÷¿ú¦³¨S¦³¤j©óÅU°İÁ~¤ô¡A¦³«h§ë¸ê«ö¶s¬°¥i¥Î ¨S¦³«h§ë¸ê«ö¶s¬°¤£¥i¥Î
+		//åˆ¤æ–·æŒæœ‰é‡‘éŒ¢æœ‰æ²’æœ‰å¤§æ–¼é¡§å•è–ªæ°´ï¼Œæœ‰å‰‡æŠ•è³‡æŒ‰éˆ•ç‚ºå¯ç”¨ æ²’æœ‰å‰‡æŠ•è³‡æŒ‰éˆ•ç‚ºä¸å¯ç”¨
 		if(MainState.OwnMoney >= MainState.Consultant[Now_Select_Consultant_Number].GetSalary()) ManageInvestionButton.interactable = true;
 		else ManageInvestionButton.interactable = false;
 
-		//ÅU°İ¹Ï¤ù
+		//é¡§å•åœ–ç‰‡
 		ConsultantImage.sprite = (Sprite)Resources.Load<Sprite>(MainState.Consultant_Image_String[Now_Select_Consultant_Number]);
 
 	}
 		
-	//°Æµ{¦¡:§ä¥X¤w¶±¥Î¸g²z Äµ½Ã ÅU°İ³Ì¤j½s¸¹ 
+	//å‰¯ç¨‹å¼:æ‰¾å‡ºå·²é›‡ç”¨ç¶“ç† è­¦è¡› é¡§å•æœ€å¤§ç·¨è™Ÿ 
 	void Find_Max_Employee_Number(){
 
-		//±q³Ì¤p½s¸¹¨ì³Ì¤j½s¸¹·j´M¤@¹M¡A¥u­n¬O¤w¹µ¥Î­û¤u«h­×§ï½s¸¹
+		//å¾æœ€å°ç·¨è™Ÿåˆ°æœ€å¤§ç·¨è™Ÿæœå°‹ä¸€éï¼Œåªè¦æ˜¯å·²åƒ±ç”¨å“¡å·¥å‰‡ä¿®æ”¹ç·¨è™Ÿ
 		//********************************************************
 		for (int i = 0; i < MainState.ManageNumber; i++) {
 			if (MainState.Manage [i].GetHire ())
@@ -1288,33 +1289,33 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:¶i¤Jµe­±³]©w¤w¾Ö¦³ªº©±¾Qªº¸gÀç«ö¶s¬°¥i¥Î©Î¤£¥i¥Î
+	//å‰¯ç¨‹å¼:é€²å…¥ç•«é¢è¨­å®šå·²æ“æœ‰çš„åº—é‹ªçš„ç¶“ç‡ŸæŒ‰éˆ•ç‚ºå¯ç”¨æˆ–ä¸å¯ç”¨
 	void Set_First_ManageButton(){
 		
-		//±N¥¼¾Ö¦³©±¾Q ©Î ¤w§ë¸ê©±¾Qªº¸gÀç«ö¶s³]¬°¤£¥i¥Î
+		//å°‡æœªæ“æœ‰åº—é‹ª æˆ– å·²æŠ•è³‡åº—é‹ªçš„ç¶“ç‡ŸæŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
  		for(int i=0; i<10; i++){
 			switch (Manage_Area_Number) {
-			//ÄÑ¥]®v³Å
+			//éºµåŒ…å¸«å‚…
 			case 0:
 				if(MainState.BreadStore[i].GetOwnBool()==false || MainState.BreadStore[i].GetInvestBool()==true || MainState.BreadArea.GetManage()==false || DecisionBool == true || MainState.BreadStore[i].GetLevel() == 10) ManageButton [i].interactable = false;
 				else ManageButton [i].interactable = true;
 				break;
-				//­µ¼Ö¤H
+				//éŸ³æ¨‚äºº
 			case 1:
 				if(MainState.MusicStore[i].GetOwnBool()==false || MainState.MusicStore[i].GetInvestBool()==true || MainState.MusicArea.GetManage()==false || DecisionBool == true || MainState.MusicStore[i].GetLevel() == 10) ManageButton [i].interactable = false;
 				else ManageButton [i].interactable = true;
 				break;
-				//¬ì§Ş·s¶Q
+				//ç§‘æŠ€æ–°è²´
 			case 2:
 				if(MainState.TehcnologyStore[i].GetOwnBool()==false || MainState.TehcnologyStore[i].GetInvestBool()==true || MainState.TehcnologyArea.GetManage()==false || DecisionBool == true || MainState.TehcnologyStore[i].GetLevel() == 10) ManageButton [i].interactable = false;
 				else ManageButton [i].interactable = true;
 				break;
-				//¾÷¤u
+				//æ©Ÿå·¥
 			case 3:
 				if(MainState.FactoryStore[i].GetOwnBool()==false || MainState.FactoryStore[i].GetInvestBool()==true || MainState.FactoryArea.GetManage()==false || DecisionBool == true || MainState.FactoryStore[i].GetLevel() == 10) ManageButton [i].interactable = false;
 				else ManageButton [i].interactable = true;
 				break;
-				//»È¦æ®a
+				//éŠ€è¡Œå®¶
 			case 4:
 				if(MainState.EconomicStore[i].GetOwnBool()==false || MainState.EconomicStore[i].GetInvestBool()==true || MainState.EconomicArea.GetManage()==false || DecisionBool == true || MainState.EconomicStore[i].GetLevel() == 10) ManageButton [i].interactable = false;
 				else ManageButton [i].interactable = true;
@@ -1325,10 +1326,10 @@ public class Manage : MonoBehaviour {
 	}
 
 
-	//°Æµ{¦¡:³]©w°Ï°ì­I´º¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šå€åŸŸèƒŒæ™¯åœ–ç‰‡
 	void Set_PlaceBackGround_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
 			OnePlace.SetActive (true);
 			TwoPlace.SetActive (false);
@@ -1336,7 +1337,7 @@ public class Manage : MonoBehaviour {
 			FourPlace.SetActive (false);
 			FivePlace.SetActive (false);
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
 			OnePlace.SetActive (false);
 			TwoPlace.SetActive (true);
@@ -1344,7 +1345,7 @@ public class Manage : MonoBehaviour {
 			FourPlace.SetActive (false);
 			FivePlace.SetActive (false);
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
 			OnePlace.SetActive (false);
 			TwoPlace.SetActive (false);
@@ -1352,7 +1353,7 @@ public class Manage : MonoBehaviour {
 			FourPlace.SetActive (false);
 			FivePlace.SetActive (false);
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
 			OnePlace.SetActive (false);
 			TwoPlace.SetActive (false);
@@ -1360,7 +1361,7 @@ public class Manage : MonoBehaviour {
 			FourPlace.SetActive (true);
 			FivePlace.SetActive (false);
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
 			OnePlace.SetActive (false);
 			TwoPlace.SetActive (false);
@@ -1373,46 +1374,46 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:³]©w°Ï°ì¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šå€åŸŸåœ–ç‰‡
 	void Set_Place_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//°Ï°ì¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			Area_Image.sprite = (Sprite)Resources.Load<Sprite>("Bread_InSide");
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//°Ï°ì¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			Area_Image.sprite = (Sprite)Resources.Load<Sprite>("Music_InSide");
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//°Ï°ì¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			Area_Image.sprite = (Sprite)Resources.Load<Sprite>("Technology_InSide");
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//°Ï°ì¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			Area_Image.sprite = (Sprite)Resources.Load<Sprite>("Factory_InSide");
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//°Ï°ì¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			Area_Image.sprite = (Sprite)Resources.Load<Sprite>("Economic_InSide");
 			break;
 
 		}//switch
 	}
 
-	//°Æµ{¦¡:³]©w¦û¦³²v¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šä½”æœ‰ç‡åœ–ç‰‡
 	void Set_Present_Image(){
 		float PresentTemp = 0.0f;
 	
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//°Ï°ì¦û¦³²v(ÄÑ¥]®v³Å)
+			//å€åŸŸä½”æœ‰ç‡(éºµåŒ…å¸«å‚…)
 			for (int i = 0; i < MainState.BreadStoreNumber; i++) {
 				if (MainState.BreadStore [i].GetOwnBool())
 					PresentTemp = PresentTemp + 1.0f;
@@ -1420,9 +1421,9 @@ public class Manage : MonoBehaviour {
 			Present_Image.fillAmount = (PresentTemp / MainState.BreadStoreNumber);
 			PresentTemp = 0.0f;
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//°Ï°ì¦û¦³²v(­µ¼Ö¤H)
+			//å€åŸŸä½”æœ‰ç‡(éŸ³æ¨‚äºº)
 			for (int i = 0; i < MainState.MusicStoreNumber; i++) {
 				if (MainState.MusicStore [i].GetOwnBool())
 					PresentTemp = PresentTemp + 1.0f;
@@ -1430,9 +1431,9 @@ public class Manage : MonoBehaviour {
 			Present_Image.fillAmount = (PresentTemp / MainState.MusicStoreNumber);
 			PresentTemp = 0.0f;
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//°Ï°ì¦û¦³²v(¬ì§Ş·s¶Q)
+			//å€åŸŸä½”æœ‰ç‡(ç§‘æŠ€æ–°è²´)
 			for (int i = 0; i < MainState.TehcnologyStoreNumber; i++) {
 				if (MainState.TehcnologyStore [i].GetOwnBool())
 					PresentTemp = PresentTemp + 1.0f;
@@ -1440,9 +1441,9 @@ public class Manage : MonoBehaviour {
 			Present_Image.fillAmount = (PresentTemp / MainState.TehcnologyStoreNumber);
 			PresentTemp = 0.0f;
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//°Ï°ì¦û¦³²v(¾÷¤u)
+			//å€åŸŸä½”æœ‰ç‡(æ©Ÿå·¥)
 			for (int i = 0; i < MainState.FactoryStoreNumber; i++) {
 				if (MainState.FactoryStore [i].GetOwnBool())
 					PresentTemp = PresentTemp + 1.0f;
@@ -1450,9 +1451,9 @@ public class Manage : MonoBehaviour {
 			Present_Image.fillAmount = (PresentTemp / MainState.FactoryStoreNumber);
 			PresentTemp = 0.0f;
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//°Ï°ì¦û¦³²v(»È¦æ®a)
+			//å€åŸŸä½”æœ‰ç‡(éŠ€è¡Œå®¶)
 			for (int i = 0; i < MainState.EconomicStoreNumber; i++) {
 				if (MainState.EconomicStore [i].GetOwnBool())
 					PresentTemp = PresentTemp + 1.0f;
@@ -1466,79 +1467,79 @@ public class Manage : MonoBehaviour {
 	}
 
 
-	//°Æµ{¦¡:³]©w°Ï°ì¸g²z¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šå€åŸŸç¶“ç†åœ–ç‰‡
 	void Set_Area_Manage_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//°Ï°ì¸g²z¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸç¶“ç†åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.ManageNumber; i++){
-				//¦³¸g²z¥X¶Ô
+				//æœ‰ç¶“ç†å‡ºå‹¤
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 0) {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite>(MainState.Manage_Image_String[i]);
 					break;
 				}
-				//¨S¦³¸g²z¥X¶Ô
+				//æ²’æœ‰ç¶“ç†å‡ºå‹¤
 				else {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite> ("NO_Employee");
 				}
 			}
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//°Ï°ì¸g²z¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸç¶“ç†åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.ManageNumber; i++){
-				//¦³¸g²z¥X¶Ô
+				//æœ‰ç¶“ç†å‡ºå‹¤
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 1) {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite>(MainState.Manage_Image_String[i]);
 					break;
 				}
-				//¨S¦³¸g²z¥X¶Ô
+				//æ²’æœ‰ç¶“ç†å‡ºå‹¤
 				else {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite> ("NO_Employee");
 				}
 			}
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//°Ï°ì¸g²z¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸç¶“ç†åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.ManageNumber; i++){
-				//¦³¸g²z¥X¶Ô
+				//æœ‰ç¶“ç†å‡ºå‹¤
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 2) {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite>(MainState.Manage_Image_String[i]);
 					break;
 				}
-				//¨S¦³¸g²z¥X¶Ô
+				//æ²’æœ‰ç¶“ç†å‡ºå‹¤
 				else {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite> ("NO_Employee");
 				}
 			}
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//°Ï°ì¸g²z¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸç¶“ç†åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.ManageNumber; i++){
-				//¦³¸g²z¥X¶Ô
+				//æœ‰ç¶“ç†å‡ºå‹¤
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 3) {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite>(MainState.Manage_Image_String[i]);
 					break;
 				}
-				//¨S¦³¸g²z¥X¶Ô
+				//æ²’æœ‰ç¶“ç†å‡ºå‹¤
 				else {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite> ("NO_Employee");
 				}
 			}
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//°Ï°ì¸g²z¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸç¶“ç†åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.ManageNumber; i++){
-				//¦³¸g²z¥X¶Ô
+				//æœ‰ç¶“ç†å‡ºå‹¤
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 4) {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite>(MainState.Manage_Image_String[i]);
 					break;
 				}
-				//¨S¦³¸g²z¥X¶Ô
+				//æ²’æœ‰ç¶“ç†å‡ºå‹¤
 				else {
 					EconomyPeople_Image.sprite = (Sprite)Resources.Load<Sprite> ("NO_Employee");
 				}
@@ -1548,44 +1549,44 @@ public class Manage : MonoBehaviour {
 		}//switch
 	}
 
-	//°Æµ{¦¡:³]©w°Ï°ìÄµ½Ã¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šå€åŸŸè­¦è¡›åœ–ç‰‡
 	void Set_Area_Security_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//°Ï°ìÄµ½Ã¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸè­¦è¡›åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.SecurityNumber; i++){
-				//¦³Äµ½Ã¥X¶Ô
+				//æœ‰è­¦è¡›å‡ºå‹¤
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace () == 0) {
 					SecurityPeople_Image.sprite = (Sprite)Resources.Load<Sprite> (MainState.Security_Image_String [i]);
 					break;
 				}
-				//¨S¦³Äµ½Ã¥X¶Ô
+				//æ²’æœ‰è­¦è¡›å‡ºå‹¤
 				else {
 					SecurityPeople_Image.sprite = (Sprite)Resources.Load<Sprite> ("NO_Employee");
 				}
 			}
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//°Ï°ìÄµ½Ã¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸè­¦è¡›åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.SecurityNumber; i++){
-				//¦³Äµ½Ã¥X¶Ô
+				//æœ‰è­¦è¡›å‡ºå‹¤
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace() == 1) {
 					SecurityPeople_Image.sprite = (Sprite)Resources.Load<Sprite>(MainState.Security_Image_String[i]);
 					break;
 				}
-				//¨S¦³Äµ½Ã¥X¶Ô
+				//æ²’æœ‰è­¦è¡›å‡ºå‹¤
 				else {
 					SecurityPeople_Image.sprite = (Sprite)Resources.Load<Sprite> ("NO_Employee");
 				}
 			}
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//°Ï°ìÄµ½Ã¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸè­¦è¡›åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.SecurityNumber; i++){
-				//¦³Äµ½Ã¥X¶Ô
+				//æœ‰è­¦è¡›å‡ºå‹¤
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace() == 2) {
 					SecurityPeople_Image.sprite = (Sprite)Resources.Load<Sprite>(MainState.Security_Image_String[i]);
 					break;
@@ -1594,31 +1595,31 @@ public class Manage : MonoBehaviour {
 				}
 			}
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//°Ï°ìÄµ½Ã¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸè­¦è¡›åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.SecurityNumber; i++){
-				//¦³Äµ½Ã¥X¶Ô
+				//æœ‰è­¦è¡›å‡ºå‹¤
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace() == 3) {
 					SecurityPeople_Image.sprite = (Sprite)Resources.Load<Sprite>(MainState.Security_Image_String[i]);
 					break;
 				}
-				//¨S¦³Äµ½Ã¥X¶Ô
+				//æ²’æœ‰è­¦è¡›å‡ºå‹¤
 				else {
 					SecurityPeople_Image.sprite = (Sprite)Resources.Load<Sprite> ("NO_Employee");
 				}
 			}
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//°Ï°ìÄµ½Ã¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//å€åŸŸè­¦è¡›åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.SecurityNumber; i++){
-				//¦³Äµ½Ã¥X¶Ô
+				//æœ‰è­¦è¡›å‡ºå‹¤
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace() == 4) {
 					SecurityPeople_Image.sprite = (Sprite)Resources.Load<Sprite>(MainState.Security_Image_String[i]);
 					break;
 				}
-				//¨S¦³Äµ½Ã¥X¶Ô
+				//æ²’æœ‰è­¦è¡›å‡ºå‹¤
 				else {
 					SecurityPeople_Image.sprite = (Sprite)Resources.Load<Sprite> ("NO_Employee");
 				}
@@ -1628,86 +1629,86 @@ public class Manage : MonoBehaviour {
 		}//switch
 	}
 
-	//°Æµ{¦¡:³]©w©±¾Q¤ÀÃş¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªåˆ†é¡åœ–ç‰‡
 	void Set_Store_Class_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//©±¾Q¤ÀÃş¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåˆ†é¡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.BreadStoreNumber; i++){
-				//1:²i¶¹  
+				//1:çƒ¹é£ª  
 				if(MainState.BreadStore[i].GetClassification()==1)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("food");
-				//2:­µ¼Ö
+				//2:éŸ³æ¨‚
 				else if(MainState.BreadStore[i].GetClassification()==2)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("music-player");
-				//3:¬ì§Ş 
+				//3:ç§‘æŠ€ 
 				else if(MainState.BreadStore[i].GetClassification()==3)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("smartphone-call");
-				//4:¾÷¤u 
+				//4:æ©Ÿå·¥ 
 				else if(MainState.BreadStore[i].GetClassification()==4)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("screwdriver-and-wrench-crossed");
-				//5:ª÷¿Ä
+				//5:é‡‘è
 				else if(MainState.BreadStore[i].GetClassification()==5)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("bank-building");
 			}
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//©±¾Q¤ÀÃş¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåˆ†é¡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.MusicStoreNumber; i++){
-				//1:²i¶¹  
+				//1:çƒ¹é£ª  
 				if(MainState.MusicStore[i].GetClassification()==1)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("food");
-				//2:­µ¼Ö
+				//2:éŸ³æ¨‚
 				else if(MainState.MusicStore[i].GetClassification()==2)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("music-player");
-				//3:¬ì§Ş 
+				//3:ç§‘æŠ€ 
 				else if(MainState.MusicStore[i].GetClassification()==3)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("smartphone-call");
-				//4:¾÷¤u 
+				//4:æ©Ÿå·¥ 
 				else if(MainState.MusicStore[i].GetClassification()==4)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("screwdriver-and-wrench-crossed");
-				//5:ª÷¿Ä
+				//5:é‡‘è
 				else if(MainState.MusicStore[i].GetClassification()==5)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("bank-building");
 			}
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//©±¾Q¤ÀÃş¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåˆ†é¡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.TehcnologyStoreNumber; i++){
-				//1:²i¶¹  
+				//1:çƒ¹é£ª  
 				if(MainState.TehcnologyStore[i].GetClassification()==1)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("food");
-				//2:­µ¼Ö
+				//2:éŸ³æ¨‚
 				else if(MainState.TehcnologyStore[i].GetClassification()==2)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("music-player");
-				//3:¬ì§Ş 
+				//3:ç§‘æŠ€ 
 				else if(MainState.TehcnologyStore[i].GetClassification()==3)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("smartphone-call");
-				//4:¾÷¤u 
+				//4:æ©Ÿå·¥ 
 				else if(MainState.TehcnologyStore[i].GetClassification()==4)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("screwdriver-and-wrench-crossed");
-				//5:ª÷¿Ä
+				//5:é‡‘è
 				else if(MainState.TehcnologyStore[i].GetClassification()==5)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("bank-building");
 			}
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//©±¾Q¤ÀÃş¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåˆ†é¡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.FactoryStoreNumber; i++){
-				//1:²i¶¹  
+				//1:çƒ¹é£ª  
 				if(MainState.FactoryStore[i].GetClassification()==1)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("food");
-				//2:­µ¼Ö
+				//2:éŸ³æ¨‚
 				else if(MainState.FactoryStore[i].GetClassification()==2)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("music-player");
-				//3:¬ì§Ş 
+				//3:ç§‘æŠ€ 
 				else if(MainState.FactoryStore[i].GetClassification()==3)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("smartphone-call");
-				//4:¾÷¤u 
+				//4:æ©Ÿå·¥ 
 				else if(MainState.FactoryStore[i].GetClassification()==4)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("screwdriver-and-wrench-crossed");
-				//5:ª÷¿Ä
+				//5:é‡‘è
 				else if(MainState.FactoryStore[i].GetClassification()==5)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("bank-building");
 			}
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//©±¾Q¤ÀÃş¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåˆ†é¡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.EconomicStoreNumber; i++){
-				//1:²i¶¹  
+				//1:çƒ¹é£ª  
 				if(MainState.EconomicStore[i].GetClassification()==1)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("food");
-				//2:­µ¼Ö
+				//2:éŸ³æ¨‚
 				else if(MainState.EconomicStore[i].GetClassification()==2)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("music-player");
-				//3:¬ì§Ş 
+				//3:ç§‘æŠ€ 
 				else if(MainState.EconomicStore[i].GetClassification()==3)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("smartphone-call");
-				//4:¾÷¤u 
+				//4:æ©Ÿå·¥ 
 				else if(MainState.EconomicStore[i].GetClassification()==4)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("screwdriver-and-wrench-crossed");
-				//5:ª÷¿Ä
+				//5:é‡‘è
 				else if(MainState.EconomicStore[i].GetClassification()==5)ClassImage[i].sprite = (Sprite)Resources.Load<Sprite>("bank-building");
 			}
 			break;
@@ -1716,40 +1717,40 @@ public class Manage : MonoBehaviour {
 	
 	}
 
-	//°Æµ{¦¡:³]©w©±¾Q¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªåœ–ç‰‡
 	void Set_Store_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//©±¾Q¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.BreadStoreNumber; i++){
 				Store_Image[i].sprite = (Sprite)Resources.Load<Sprite>(MainState.BreadStoreImage_String[i]);
 			}
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//©±¾Q¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.MusicStoreNumber; i++){
 				Store_Image[i].sprite = (Sprite)Resources.Load<Sprite>(MainState.MusicStoreImage_String[i]);
 			}
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//©±¾Q¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.TehcnologyStoreNumber; i++){
 				Store_Image[i].sprite = (Sprite)Resources.Load<Sprite>(MainState.TehcnologyStoreImage_String[i]);
 			}
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//©±¾Q¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.FactoryStoreNumber; i++){
 				Store_Image[i].sprite = (Sprite)Resources.Load<Sprite>(MainState.FactoryStoreImage_String[i]);
 			}
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//©±¾Q¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªåœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.EconomicStoreNumber; i++){
 				Store_Image[i].sprite = (Sprite)Resources.Load<Sprite>(MainState.EconomicStoreImage_String[i]);
 			}
@@ -1759,65 +1760,65 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:³]©w©±¾Q§ë¸ê¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªæŠ•è³‡åœ–ç‰‡
 	void Set_Store_Invest_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//©±¾Q§ë¸ê¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæŠ•è³‡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.BreadStoreNumber; i++){
-				//¤w§ë¸ê
+				//å·²æŠ•è³‡
 				if (MainState.BreadStore [i].GetInvestBool () == true)
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,255.0f);
-				//¥¼§ë¸ê
+				//æœªæŠ•è³‡
 				else
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 			}
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//©±¾Q§ë¸ê¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæŠ•è³‡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.MusicStoreNumber; i++){
-				//¤w§ë¸ê
+				//å·²æŠ•è³‡
 				if (MainState.MusicStore [i].GetInvestBool () == true)
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,255.0f);
-				//¥¼§ë¸ê
+				//æœªæŠ•è³‡
 				else
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 			}
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//©±¾Q§ë¸ê¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæŠ•è³‡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.TehcnologyStoreNumber; i++){
-				//¤w§ë¸ê
+				//å·²æŠ•è³‡
 				if (MainState.TehcnologyStore [i].GetInvestBool () == true)
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,255.0f);
-				//¥¼§ë¸ê
+				//æœªæŠ•è³‡
 				else
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 			}
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//©±¾Q§ë¸ê¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæŠ•è³‡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.FactoryStoreNumber; i++){
-				//¤w§ë¸ê
+				//å·²æŠ•è³‡
 				if (MainState.FactoryStore [i].GetInvestBool () == true)
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,255.0f);
-				//¥¼§ë¸ê
+				//æœªæŠ•è³‡
 				else
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 			}
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//©±¾Q§ë¸ê¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæŠ•è³‡åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.EconomicStoreNumber; i++){
-				//¤w§ë¸ê
+				//å·²æŠ•è³‡
 				if (MainState.EconomicStore [i].GetInvestBool () == true)
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,255.0f);
-				//¥¼§ë¸ê
+				//æœªæŠ•è³‡
 				else
 					InvestImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 			}
@@ -1827,83 +1828,83 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:³]©w©±¾Q¬O§_¾Ö¦³¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªæ˜¯å¦æ“æœ‰åœ–ç‰‡
 	void Set_Store_Own_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//©±¾Q¬O§_¾Ö¦³¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæ˜¯å¦æ“æœ‰åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.BreadStoreNumber; i++){
-				//¾Ö¦³
+				//æ“æœ‰
 				if (MainState.BreadStore [i].GetOwnBool() == true) {
 					OwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 255.0f);
 					UnOwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
 				} 
-				//¥¼¾Ö¦³
+				//æœªæ“æœ‰
 				else {
 					OwnImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 					UnOwnImage[i].color = new Color(255.0f,255.0f,255.0f,255.0f);
 				}
 			}
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//©±¾Q¬O§_¾Ö¦³¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæ˜¯å¦æ“æœ‰åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.MusicStoreNumber; i++){
-				//¾Ö¦³
+				//æ“æœ‰
 				if (MainState.MusicStore [i].GetOwnBool() == true) {
 					OwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 255.0f);
 					UnOwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
 				} 
-				//¥¼¾Ö¦³
+				//æœªæ“æœ‰
 				else {
 					OwnImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 					UnOwnImage[i].color = new Color(255.0f,255.0f,255.0f,255.0f);
 				}
 			}
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//©±¾Q¬O§_¾Ö¦³¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæ˜¯å¦æ“æœ‰åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.TehcnologyStoreNumber; i++){
-				//¾Ö¦³
+				//æ“æœ‰
 				if (MainState.TehcnologyStore [i].GetOwnBool() == true) {
 					OwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 255.0f);
 					UnOwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
 				} 
-				//¥¼¾Ö¦³
+				//æœªæ“æœ‰
 				else {
 					OwnImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 					UnOwnImage[i].color = new Color(255.0f,255.0f,255.0f,255.0f);
 				}
 			}
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//©±¾Q¬O§_¾Ö¦³¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæ˜¯å¦æ“æœ‰åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.FactoryStoreNumber; i++){
-				//¾Ö¦³
+				//æ“æœ‰
 				if (MainState.FactoryStore [i].GetOwnBool() == true) {
 					OwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 255.0f);
 					UnOwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
 				} 
-				//¥¼¾Ö¦³
+				//æœªæ“æœ‰
 				else {
 					OwnImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 					UnOwnImage[i].color = new Color(255.0f,255.0f,255.0f,255.0f);
 				}
 			}
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//©±¾Q¬O§_¾Ö¦³¹Ï¤ù(Åª¨ú¦bResources¸ê®Æ§¨ªº¹Ï¤ù)
+			//åº—é‹ªæ˜¯å¦æ“æœ‰åœ–ç‰‡(è®€å–åœ¨Resourcesè³‡æ–™å¤¾çš„åœ–ç‰‡)
 			for(int i=0; i<MainState.EconomicStoreNumber; i++){
-				//¾Ö¦³
+				//æ“æœ‰
 				if (MainState.EconomicStore [i].GetOwnBool() == true) {
 					OwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 255.0f);
 					UnOwnImage [i].color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
 				} 
-				//¥¼¾Ö¦³
+				//æœªæ“æœ‰
 				else {
 					OwnImage [i].color = new Color(255.0f,255.0f,255.0f,0.0f);
 					UnOwnImage[i].color = new Color(255.0f,255.0f,255.0f,255.0f);
@@ -1915,40 +1916,40 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:³]©w©±¾Qµ¥¯Å¸gÅç¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šåº—é‹ªç­‰ç´šç¶“é©—åœ–ç‰‡
 	void Set_Store_LevelEX_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//©±¾Qµ¥¯Å
+			//åº—é‹ªç­‰ç´š
 			for(int i=0; i<MainState.BreadStoreNumber; i++){
 				LevelBarImage [i].fillAmount = MainState.BreadStore [i].GetLevelEx() / 100.0f;
 			}
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//©±¾Qµ¥¯Å
+			//åº—é‹ªç­‰ç´š
 			for(int i=0; i<MainState.MusicStoreNumber; i++){
 				LevelBarImage [i].fillAmount = MainState.MusicStore [i].GetLevelEx() / 100.0f;
 			}
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//©±¾Qµ¥¯Å
+			//åº—é‹ªç­‰ç´š
 			for(int i=0; i<MainState.TehcnologyStoreNumber; i++){
 				LevelBarImage [i].fillAmount = MainState.TehcnologyStore [i].GetLevelEx() / 100.0f;
 			}
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//©±¾Qµ¥¯Å
+			//åº—é‹ªç­‰ç´š
 			for(int i=0; i<MainState.FactoryStoreNumber; i++){
 				LevelBarImage [i].fillAmount = MainState.FactoryStore [i].GetLevelEx() / 100.0f;
 			}
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//©±¾Qµ¥¯Å
+			//åº—é‹ªç­‰ç´š
 			for(int i=0; i<MainState.EconomicStoreNumber; i++){
 				LevelBarImage [i].fillAmount = MainState.EconomicStore [i].GetLevelEx() / 100.0f;
 			}
@@ -1958,61 +1959,61 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:³]©w¥X¶Ô¤¤¹Ï¤ù©M¥X¶Ô«ö¶s
+	//å‰¯ç¨‹å¼:è¨­å®šå‡ºå‹¤ä¸­åœ–ç‰‡å’Œå‡ºå‹¤æŒ‰éˆ•
 	void Set_Work_Image_Button(){
-		//¸g²z¥X¶Ô¹Ï¤ù
-		//¥X¶Ô¤¤
+		//ç¶“ç†å‡ºå‹¤åœ–ç‰‡
+		//å‡ºå‹¤ä¸­
 		if (MainState.Manage [Now_Select_Manage_Number].GetWork () == true) {
-			//Åã¥Ü¥X¶Ô¹Ï¤ù
+			//é¡¯ç¤ºå‡ºå‹¤åœ–ç‰‡
 			ManageWork_Image.color = new Color (255.0f, 255.0f, 255.0f, 255.0f);
-			//¥X¶Ô«ö¶s³]¬°¤£¥i¥Î
+			//å‡ºå‹¤æŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 			Manage_Work_Button.interactable = false;
-			//¨ø¥ô«ö¶s³]¬°¥i¥Î
+			//å¸ä»»æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 			Manage_UnWork_Button.interactable = true;
 		}
-		//¥¼¥X¶Ô
+		//æœªå‡ºå‹¤
 		else {
-			//ÁôÂÃ¥X¶Ô¹Ï¤ù
+			//éš±è—å‡ºå‹¤åœ–ç‰‡
 			ManageWork_Image.color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
-			//¥X¶Ô«ö¶s³]¬°¥i¥Î
+			//å‡ºå‹¤æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 			Manage_Work_Button.interactable = true;
-			//¨ø¥ô«ö¶s³]¬°¤£¥i¥Î
+			//å¸ä»»æŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 			Manage_UnWork_Button.interactable = false;
 		}
 
-		//Äµ½Ã¥X¶Ô¹Ï¤ù
-		//¥X¶Ô¤¤
+		//è­¦è¡›å‡ºå‹¤åœ–ç‰‡
+		//å‡ºå‹¤ä¸­
 		if (MainState.Security [Now_Select_Security_Number].GetWork () == true) {
-			//Åã¥Ü¥X¶Ô¹Ï¤ù
+			//é¡¯ç¤ºå‡ºå‹¤åœ–ç‰‡
 			SecurityWork_Image.color = new Color (255.0f, 255.0f, 255.0f, 255.0f);
-			//¥X¶Ô«ö¶s³]¬°¤£¥i¥Î
+			//å‡ºå‹¤æŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 			Security_Work_Button.interactable = false;
-			//¨ø¥ô«ö¶s³]¬°¥i¥Î
+			//å¸ä»»æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 			Security_UnWork_Button.interactable = true;
 		}
-		//¥¼¥X¶Ô
+		//æœªå‡ºå‹¤
 		else {
-			//ÁôÂÃ¥X¶Ô¹Ï¤ù
+			//éš±è—å‡ºå‹¤åœ–ç‰‡
 			SecurityWork_Image.color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
-			//¥X¶Ô«ö¶s³]¬°¥i¥Î
+			//å‡ºå‹¤æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 			Security_Work_Button.interactable = true;
-			//¨ø¥ô«ö¶s³]¬°¤£¥i¥Î
+			//å¸ä»»æŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 			Security_UnWork_Button.interactable = false;
 		}
 
 	}
 
-	//°Æµ{¦¡:¸g²z¥X¶Ô«ö¶s
+	//å‰¯ç¨‹å¼:ç¶“ç†å‡ºå‹¤æŒ‰éˆ•
 	public void Set_Manage_Work_Button(){
-		//¼½©ñPayBack­µ®Ä
+		//æ’­æ”¾PayBackéŸ³æ•ˆ
 		MainState.PayBack_Button_Sounds_Play();
-		//¼½©ñ¸g²z¥X¶Ô°Êµe
+		//æ’­æ”¾ç¶“ç†å‡ºå‹¤å‹•ç•«
 		Now_Manage_Security_Animation [0].Play ();
 
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.ManageNumber; i++){
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 0) {
 					MainState.Manage [i].SetWork (false);
@@ -2020,14 +2021,14 @@ public class Manage : MonoBehaviour {
 				}
 			}
 				
-			//·s°Ï°ì¸g²z³]¬°¥X¶Ô
+			//æ–°å€åŸŸç¶“ç†è¨­ç‚ºå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (true);
 			MainState.Manage [Now_Select_Manage_Number].SetWorkPlace (0);
 
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.ManageNumber; i++){
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 1) {
 					MainState.Manage [i].SetWork (false);
@@ -2035,13 +2036,13 @@ public class Manage : MonoBehaviour {
 				}
 			}
 
-			//·s°Ï°ì¸g²z³]¬°¥X¶Ô
+			//æ–°å€åŸŸç¶“ç†è¨­ç‚ºå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (true);
 			MainState.Manage [Now_Select_Manage_Number].SetWorkPlace (1);
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.ManageNumber; i++){
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 2) {
 					MainState.Manage [i].SetWork (false);
@@ -2049,13 +2050,13 @@ public class Manage : MonoBehaviour {
 				}
 			}
 
-			//·s°Ï°ì¸g²z³]¬°¥X¶Ô
+			//æ–°å€åŸŸç¶“ç†è¨­ç‚ºå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (true);
 			MainState.Manage [Now_Select_Manage_Number].SetWorkPlace (2);
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.ManageNumber; i++){
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 3) {
 					MainState.Manage [i].SetWork (false);
@@ -2063,13 +2064,13 @@ public class Manage : MonoBehaviour {
 				}
 			}
 
-			//·s°Ï°ì¸g²z³]¬°¥X¶Ô
+			//æ–°å€åŸŸç¶“ç†è¨­ç‚ºå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (true);
 			MainState.Manage [Now_Select_Manage_Number].SetWorkPlace (3);
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.ManageNumber; i++){
 				if (MainState.Manage [i].GetWork () == true && MainState.Manage [i].GetWorkPlace() == 4) {
 					MainState.Manage [i].SetWork (false);
@@ -2077,7 +2078,7 @@ public class Manage : MonoBehaviour {
 				}
 			}
 
-			//·s°Ï°ì¸g²z³]¬°¥X¶Ô
+			//æ–°å€åŸŸç¶“ç†è¨­ç‚ºå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (true);
 			MainState.Manage [Now_Select_Manage_Number].SetWorkPlace (4);
 			break;
@@ -2086,17 +2087,17 @@ public class Manage : MonoBehaviour {
 
 	} 
 
-	//°Æµ{¦¡:Äµ½Ã¥X¶Ô«ö¶s
+	//å‰¯ç¨‹å¼:è­¦è¡›å‡ºå‹¤æŒ‰éˆ•
 	public void Set_Security_Work_Button(){
-		//¼½©ñPayBack­µ®Ä
+		//æ’­æ”¾PayBackéŸ³æ•ˆ
 		MainState.PayBack_Button_Sounds_Play();
-		//¼½©ñÄµ½Ã¥X¶Ô°Êµe
+		//æ’­æ”¾è­¦è¡›å‡ºå‹¤å‹•ç•«
 		Now_Manage_Security_Animation [1].Play ();
 
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.SecurityNumber; i++){
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace() == 0) {
 					MainState.Security [i].SetWork (false);
@@ -2104,14 +2105,14 @@ public class Manage : MonoBehaviour {
 				}
 			}
 				
-			//·s°Ï°ìÄµ½Ã³]¬°¥X¶Ô
+			//æ–°å€åŸŸè­¦è¡›è¨­ç‚ºå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (true);
 			MainState.Security [Now_Select_Security_Number].SetWorkPlace (0);
 
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.SecurityNumber; i++){
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace() == 1) {
 					MainState.Security [i].SetWork (false);
@@ -2119,13 +2120,13 @@ public class Manage : MonoBehaviour {
 				}
 			}
 
-			//·s°Ï°ìÄµ½Ã³]¬°¥X¶Ô
+			//æ–°å€åŸŸè­¦è¡›è¨­ç‚ºå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (true);
 			MainState.Security [Now_Select_Security_Number].SetWorkPlace (1);
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.SecurityNumber; i++){
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace() == 2) {
 					MainState.Security [i].SetWork (false);
@@ -2133,13 +2134,13 @@ public class Manage : MonoBehaviour {
 				}
 			}
 
-			//·s°Ï°ìÄµ½Ã³]¬°¥X¶Ô
+			//æ–°å€åŸŸè­¦è¡›è¨­ç‚ºå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (true);
 			MainState.Security [Now_Select_Security_Number].SetWorkPlace (2);
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.SecurityNumber; i++){
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace() == 3) {
 					MainState.Security [i].SetWork (false);
@@ -2147,13 +2148,13 @@ public class Manage : MonoBehaviour {
 				}
 			}
 
-			//·s°Ï°ìÄµ½Ã³]¬°¥X¶Ô
+			//æ–°å€åŸŸè­¦è¡›è¨­ç‚ºå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (true);
 			MainState.Security [Now_Select_Security_Number].SetWorkPlace (3);
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			for(int i=0; i<MainState.SecurityNumber; i++){
 				if (MainState.Security [i].GetWork () == true && MainState.Security [i].GetWorkPlace() == 4) {
 					MainState.Security [i].SetWork (false);
@@ -2161,7 +2162,7 @@ public class Manage : MonoBehaviour {
 				}
 			}
 
-			//·s°Ï°ìÄµ½Ã³]¬°¥X¶Ô
+			//æ–°å€åŸŸè­¦è¡›è¨­ç‚ºå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (true);
 			MainState.Security [Now_Select_Security_Number].SetWorkPlace (4);
 			break;
@@ -2170,35 +2171,35 @@ public class Manage : MonoBehaviour {
 			
 	} 
 
-	//°Æµ{¦¡:¸g²z¨ø¥ô«ö¶s
+	//å‰¯ç¨‹å¼:ç¶“ç†å¸ä»»æŒ‰éˆ•
 	public void Set_Manage_UnWork_Button(){
-		//¼½©ñPayBack­µ®Ä
+		//æ’­æ”¾PayBackéŸ³æ•ˆ
 		MainState.PayBack_Button_Sounds_Play();
 
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (false);
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (false);
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (false);
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (false);
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//­ì¥»°Ï°ì¸g²z³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸç¶“ç†è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Manage [Now_Select_Manage_Number].SetWork (false);
 			break;
 
@@ -2206,35 +2207,35 @@ public class Manage : MonoBehaviour {
 
 	} 
 
-	//°Æµ{¦¡:Äµ½Ã¨ø¥ô«ö¶s
+	//å‰¯ç¨‹å¼:è­¦è¡›å¸ä»»æŒ‰éˆ•
 	public void Set_Security_UnWork_Button(){
-		//¼½©ñPayBack­µ®Ä
+		//æ’­æ”¾PayBackéŸ³æ•ˆ
 		MainState.PayBack_Button_Sounds_Play();
 
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (false);
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (false);
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (false);
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (false);
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//­ì¥»°Ï°ìÄµ½Ã³]¬°¥¼¥X¶Ô
+			//åŸæœ¬å€åŸŸè­¦è¡›è¨­ç‚ºæœªå‡ºå‹¤
 			MainState.Security [Now_Select_Security_Number].SetWork (false);
 			break;
 
@@ -2243,52 +2244,52 @@ public class Manage : MonoBehaviour {
 	} 
 
 
-	//°Æµ{¦¡:³]©w´º®ğ¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šæ™¯æ°£åœ–ç‰‡
 	void Set_NowEconomy_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//´º®ğ >= 70 
+			//æ™¯æ°£ >= 70 
 			if (MainState.Bread_NowEconomy >= 70)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//´º®ğ40~69
+			//æ™¯æ°£40~69
 			else if (MainState.Bread_NowEconomy < 70 && MainState.Bread_NowEconomy >= 40)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//´º®ğ<=39
+			//æ™¯æ°£<=39
 			else NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//´º®ğ >= 70 
+			//æ™¯æ°£ >= 70 
 			if (MainState.Music_NowEconomy >= 70)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//´º®ğ40~69
+			//æ™¯æ°£40~69
 			else if (MainState.Music_NowEconomy < 70 && MainState.Music_NowEconomy >= 40)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//´º®ğ<=39
+			//æ™¯æ°£<=39
 			else NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//´º®ğ >= 70 
+			//æ™¯æ°£ >= 70 
 			if (MainState.Tehcnology_NowEconomy >= 70)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//´º®ğ40~69
+			//æ™¯æ°£40~69
 			else if (MainState.Tehcnology_NowEconomy < 70 && MainState.Tehcnology_NowEconomy >= 40)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//´º®ğ<=39
+			//æ™¯æ°£<=39
 			else NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//´º®ğ >= 70 
+			//æ™¯æ°£ >= 70 
 			if (MainState.Factory_NowEconomy >= 70)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//´º®ğ40~69
+			//æ™¯æ°£40~69
 			else if (MainState.Factory_NowEconomy < 70 && MainState.Factory_NowEconomy >= 40)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//´º®ğ<=39
+			//æ™¯æ°£<=39
 			else NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//´º®ğ >= 70 
+			//æ™¯æ°£ >= 70 
 			if (MainState.Economic_NowEconomy >= 70)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//´º®ğ40~69
+			//æ™¯æ°£40~69
 			else if (MainState.Economic_NowEconomy < 70 && MainState.Economic_NowEconomy >= 40)  NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//´º®ğ<=39
+			//æ™¯æ°£<=39
 			else NowEconomy_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
 
@@ -2296,52 +2297,52 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:³]©wªv¦w¹Ï¤ù
+	//å‰¯ç¨‹å¼:è¨­å®šæ²»å®‰åœ–ç‰‡
 	void Set_NowSecurity_Image(){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//ªv¦w >= 70 
+			//æ²»å®‰ >= 70 
 			if (MainState.Bread_NowSecurity >= 70)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//ªv¦w40~69
+			//æ²»å®‰40~69
 			else if (MainState.Bread_NowSecurity < 70 && MainState.Bread_NowSecurity >= 40)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//ªv¦w<=39
+			//æ²»å®‰<=39
 			else NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
-			//­µ¼Ö¤H
+			//éŸ³æ¨‚äºº
 		case 1:
-			//ªv¦w >= 70 
+			//æ²»å®‰ >= 70 
 			if (MainState.Music_NowSecurity >= 70)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//ªv¦w40~69
+			//æ²»å®‰40~69
 			else if (MainState.Music_NowSecurity < 70 && MainState.Music_NowSecurity >= 40)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//ªv¦w<=39
+			//æ²»å®‰<=39
 			else NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
-			//¬ì§Ş·s¶Q
+			//ç§‘æŠ€æ–°è²´
 		case 2:
-			//ªv¦w >= 70 
+			//æ²»å®‰ >= 70 
 			if (MainState.Tehcnology_NowSecurity >= 70)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//ªv¦w40~69
+			//æ²»å®‰40~69
 			else if (MainState.Tehcnology_NowSecurity < 70 && MainState.Tehcnology_NowSecurity >= 40)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//ªv¦w<=39
+			//æ²»å®‰<=39
 			else NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
-			//¾÷¤u
+			//æ©Ÿå·¥
 		case 3:
-			//ªv¦w >= 70 
+			//æ²»å®‰ >= 70 
 			if (MainState.Factory_NowSecurity >= 70)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//ªv¦w40~69
+			//æ²»å®‰40~69
 			else if (MainState.Factory_NowSecurity < 70 && MainState.Factory_NowSecurity >= 40)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//ªv¦w<=39
+			//æ²»å®‰<=39
 			else NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
-			//»È¦æ®a
+			//éŠ€è¡Œå®¶
 		case 4:
-			//ªv¦w >= 70 
+			//æ²»å®‰ >= 70 
 			if (MainState.Economic_NowSecurity >= 70)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("UP");
-			//ªv¦w40~69
+			//æ²»å®‰40~69
 			else if (MainState.Economic_NowSecurity < 70 && MainState.Economic_NowSecurity >= 40)  NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Mid");
-			//ªv¦w<=39
+			//æ²»å®‰<=39
 			else NowSecurity_Image.sprite = (Sprite)Resources.Load<Sprite>("Down");
 			break;
 
@@ -2349,270 +2350,270 @@ public class Manage : MonoBehaviour {
 
 	}
 
-	//°Æµ{¦¡:Work­¶­±
+	//å‰¯ç¨‹å¼:Worké é¢
 	public void WorkPage(){
-		//¼½©ñ«ö¶s­µ®Ä
+		//æ’­æ”¾æŒ‰éˆ•éŸ³æ•ˆ
 		MainState.Button_Sounds_Play();
 
-		//¤Á¦^©±¾Q¡A³o¼Ë¤U¦¸¦^¨Ó´N·|¦^¨ì©±¾Q­¶­±
+		//åˆ‡å›åº—é‹ªï¼Œé€™æ¨£ä¸‹æ¬¡å›ä¾†å°±æœƒå›åˆ°åº—é‹ªé é¢
 		Show_ManageStore();
-		//Åã¥ÜWorkµe­±
+		//é¡¯ç¤ºWorkç•«é¢
 		WorkBackGround.SetActive(true);
 		MainState.WorkBool = true;
-		//¼½©ñWorkPage¶i¤J°Êµe
+		//æ’­æ”¾WorkPageé€²å…¥å‹•ç•«
 		AnimationIN.WorkPage_IN_Bool();
-		//ÁôÂÃManageµe­±
+		//éš±è—Manageç•«é¢
 		ManageBackGround.SetActive(false);
 		MainState.ManageBool = false;
 	}
 
-	//°Æµ{¦¡:©±¾Q¸gÅç¼W¥[°Êµe
+	//å‰¯ç¨‹å¼:åº—é‹ªç¶“é©—å¢åŠ å‹•ç•«
 	void LevelEx_ADD(int Invest_Store_Number){
 		switch (Manage_Area_Number) {
-		//ÄÑ¥]®v³Å
+		//éºµåŒ…å¸«å‚…
 		case 0:
-			//©±¾Q¸gÅç
+			//åº—é‹ªç¶“é©—
 			if (MainState.BreadStore [Invest_Store_Number].GetLevel() != 10) {
 				MainState.BreadStore [Invest_Store_Number].SetLevelEx (MainState.BreadStore [Invest_Store_Number].GetLevelEx () + 1.0f);
 				LevelEx_Temp = LevelEx_Temp - 1.0f;
 			}
 	
-		//©±¾Q¸gÅç¨¬¥H¤É¯Å==============
+		//åº—é‹ªç¶“é©—è¶³ä»¥å‡ç´š==============
 			if (MainState.BreadStore [Invest_Store_Number].GetLevelEx () >= 100.0f) {
-				//¼½©ñµ¥¯Å´£¤É­µ®Ä
+				//æ’­æ”¾ç­‰ç´šæå‡éŸ³æ•ˆ
 				MainState.LevelUP_Button_Sounds_Play ();
-				//¼½©ñ¤É¯Å°Êµe
+				//æ’­æ”¾å‡ç´šå‹•ç•«
 				Level_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ©±¾Q¹w´Á§Q¼í´£¤É°Êµe
+				//æ’­æ”¾åº—é‹ªé æœŸåˆ©æ½¤æå‡å‹•ç•«
 				Predict_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ°Ï°ìÁ`¹w´Á§Q¼í¤W¤É°Êµe
+				//æ’­æ”¾å€åŸŸç¸½é æœŸåˆ©æ½¤ä¸Šå‡å‹•ç•«
 				Area_Predict_UP_Animation.Play();
 
-				//©±¾Qµ¥¯Å < 9
+				//åº—é‹ªç­‰ç´š < 9
 				if (MainState.BreadStore [Invest_Store_Number].GetLevel () < 9) {
 					MainState.BreadStore [Invest_Store_Number].SetLevel (MainState.BreadStore [Invest_Store_Number].GetLevel () + 1);
-					//­pºâ¦h¾lªº©±¾Q¸gÅç
+					//è¨ˆç®—å¤šé¤˜çš„åº—é‹ªç¶“é©—
 					MainState.BreadStore [Invest_Store_Number].SetLevelEx (MainState.BreadStore [Invest_Store_Number].GetLevelEx () - 100.0f);
 				}
-			//©±¾Qµ¥¯Å == 9
+			//åº—é‹ªç­‰ç´š == 9
 			else {
 					MainState.BreadStore [Invest_Store_Number].SetLevel (10);
-					//©±¾Q¸gÅç³]¬°0
+					//åº—é‹ªç¶“é©—è¨­ç‚º0
 					MainState.BreadStore [Invest_Store_Number].SetLevelEx (0.0f);
-					//¨¾¤î¤£¯à¨Ï¥Î«ö¶s
+					//é˜²æ­¢ä¸èƒ½ä½¿ç”¨æŒ‰éˆ•
 					LevelEx_Temp = 0.0f;
 				}
 
 			}
-		//³]©w©±¾Q¤w§ë¸ê
+		//è¨­å®šåº—é‹ªå·²æŠ•è³‡
 			MainState.BreadStore [Invest_Store_Number].SetInvestBool (true);
 
-			//ÁôÂÃ¿ï¾ÜÅU°İµe­±
+			//éš±è—é¸æ“‡é¡§å•ç•«é¢
 			ManageStore.SetActive(false);
-			//ÁôÂÃ¨M©wÅU°İµe­±
+			//éš±è—æ±ºå®šé¡§å•ç•«é¢
 			Decision.SetActive(false);
 
 			break;
-		//­µ¼Ö®a
+		//éŸ³æ¨‚å®¶
 		case 1:
-			//©±¾Q¸gÅç
+			//åº—é‹ªç¶“é©—
 			if (MainState.MusicStore [Invest_Store_Number].GetLevel () != 10) {
 				MainState.MusicStore [Invest_Store_Number].SetLevelEx (MainState.MusicStore [Invest_Store_Number].GetLevelEx () + 1.0f);
 				LevelEx_Temp = LevelEx_Temp - 1.0f;
 			}
-			//©±¾Q¸gÅç¨¬¥H¤É¯Å==============
+			//åº—é‹ªç¶“é©—è¶³ä»¥å‡ç´š==============
 			if(MainState.MusicStore[Invest_Store_Number].GetLevelEx()>=100.0f){
-				//¼½©ñµ¥¯Å´£¤É­µ®Ä
+				//æ’­æ”¾ç­‰ç´šæå‡éŸ³æ•ˆ
 				MainState.LevelUP_Button_Sounds_Play();
-				//¼½©ñ¤É¯Å°Êµe
+				//æ’­æ”¾å‡ç´šå‹•ç•«
 				Level_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ©±¾Q¹w´Á§Q¼í´£¤É°Êµe
+				//æ’­æ”¾åº—é‹ªé æœŸåˆ©æ½¤æå‡å‹•ç•«
 				Predict_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ°Ï°ìÁ`¹w´Á§Q¼í¤W¤É°Êµe
+				//æ’­æ”¾å€åŸŸç¸½é æœŸåˆ©æ½¤ä¸Šå‡å‹•ç•«
 				Area_Predict_UP_Animation.Play();
 
-				//©±¾Qµ¥¯Å < 9
+				//åº—é‹ªç­‰ç´š < 9
 				if (MainState.MusicStore [Invest_Store_Number].GetLevel () < 9) {
 					MainState.MusicStore [Invest_Store_Number].SetLevel (MainState.MusicStore [Invest_Store_Number].GetLevel () + 1);
-					//­pºâ¦h¾lªº©±¾Q¸gÅç
+					//è¨ˆç®—å¤šé¤˜çš„åº—é‹ªç¶“é©—
 					MainState.MusicStore [Invest_Store_Number].SetLevelEx (MainState.MusicStore [Invest_Store_Number].GetLevelEx () - 100.0f);
 				}
-				//©±¾Qµ¥¯Å == 9
+				//åº—é‹ªç­‰ç´š == 9
 				else {
 					MainState.MusicStore [Invest_Store_Number].SetLevel (10);
-					//©±¾Q¸gÅç³]¬°0
+					//åº—é‹ªç¶“é©—è¨­ç‚º0
 					MainState.MusicStore [Invest_Store_Number].SetLevelEx (0.0f);
-					//¨¾¤î¤£¯à¨Ï¥Î«ö¶s
+					//é˜²æ­¢ä¸èƒ½ä½¿ç”¨æŒ‰éˆ•
 					LevelEx_Temp = 0.0f;
 				}
 
 			}
-			//³]©w©±¾Q¤w§ë¸ê
+			//è¨­å®šåº—é‹ªå·²æŠ•è³‡
 			MainState.MusicStore [Invest_Store_Number].SetInvestBool(true);
 
-			//ÁôÂÃ¿ï¾ÜÅU°İµe­±
+			//éš±è—é¸æ“‡é¡§å•ç•«é¢
 			ManageStore.SetActive(false);
-			//ÁôÂÃ¨M©wÅU°İµe­±
+			//éš±è—æ±ºå®šé¡§å•ç•«é¢
 			Decision.SetActive(false);
 			break;
-		//¬ì§Ş·s¶Q
+		//ç§‘æŠ€æ–°è²´
 		case 2:
-			//©±¾Q¸gÅç
+			//åº—é‹ªç¶“é©—
 			if (MainState.TehcnologyStore [Invest_Store_Number].GetLevel () != 10) {
 				MainState.TehcnologyStore [Invest_Store_Number].SetLevelEx (MainState.TehcnologyStore [Invest_Store_Number].GetLevelEx () + 1.0f);
 				LevelEx_Temp = LevelEx_Temp - 1.0f;
 			}
 
-			//©±¾Q¸gÅç¨¬¥H¤É¯Å==============
+			//åº—é‹ªç¶“é©—è¶³ä»¥å‡ç´š==============
 			if(MainState.TehcnologyStore[Invest_Store_Number].GetLevelEx()>=100.0f){
-				//¼½©ñµ¥¯Å´£¤É­µ®Ä
+				//æ’­æ”¾ç­‰ç´šæå‡éŸ³æ•ˆ
 				MainState.LevelUP_Button_Sounds_Play();
-				//¼½©ñ¤É¯Å°Êµe
+				//æ’­æ”¾å‡ç´šå‹•ç•«
 				Level_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ©±¾Q¹w´Á§Q¼í´£¤É°Êµe
+				//æ’­æ”¾åº—é‹ªé æœŸåˆ©æ½¤æå‡å‹•ç•«
 				Predict_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ°Ï°ìÁ`¹w´Á§Q¼í¤W¤É°Êµe
+				//æ’­æ”¾å€åŸŸç¸½é æœŸåˆ©æ½¤ä¸Šå‡å‹•ç•«
 				Area_Predict_UP_Animation.Play();
 
-				//©±¾Qµ¥¯Å < 9
+				//åº—é‹ªç­‰ç´š < 9
 				if (MainState.TehcnologyStore [Invest_Store_Number].GetLevel () < 9) {
 					MainState.TehcnologyStore [Invest_Store_Number].SetLevel (MainState.TehcnologyStore [Invest_Store_Number].GetLevel () + 1);
-					//­pºâ¦h¾lªº©±¾Q¸gÅç
+					//è¨ˆç®—å¤šé¤˜çš„åº—é‹ªç¶“é©—
 					MainState.TehcnologyStore [Invest_Store_Number].SetLevelEx (MainState.TehcnologyStore [Invest_Store_Number].GetLevelEx () - 100.0f);
 				}
-				//©±¾Qµ¥¯Å == 9
+				//åº—é‹ªç­‰ç´š == 9
 				else {
 					MainState.TehcnologyStore [Invest_Store_Number].SetLevel (10);
-					//©±¾Q¸gÅç³]¬°0
+					//åº—é‹ªç¶“é©—è¨­ç‚º0
 					MainState.TehcnologyStore [Invest_Store_Number].SetLevelEx (0.0f);
-					//¨¾¤î¤£¯à¨Ï¥Î«ö¶s
+					//é˜²æ­¢ä¸èƒ½ä½¿ç”¨æŒ‰éˆ•
 					LevelEx_Temp = 0.0f;
 				}
 
 			}
-			//³]©w©±¾Q¤w§ë¸ê
+			//è¨­å®šåº—é‹ªå·²æŠ•è³‡
 			MainState.TehcnologyStore [Invest_Store_Number].SetInvestBool(true);
-			//ÁôÂÃ¿ï¾ÜÅU°İµe­±
+			//éš±è—é¸æ“‡é¡§å•ç•«é¢
 			ManageStore.SetActive(false);
-			//ÁôÂÃ¨M©wÅU°İµe­±
+			//éš±è—æ±ºå®šé¡§å•ç•«é¢
 			Decision.SetActive(false);
 			break;
-		//¾÷¤u
+		//æ©Ÿå·¥
 		case 3:
-			//©±¾Q¸gÅç
+			//åº—é‹ªç¶“é©—
 			if (MainState.FactoryStore [Invest_Store_Number].GetLevel () != 10) {
 				MainState.FactoryStore [Invest_Store_Number].SetLevelEx (MainState.FactoryStore [Invest_Store_Number].GetLevelEx () + 1.0f);
 				LevelEx_Temp = LevelEx_Temp - 1.0f;
 			}
-			//©±¾Q¸gÅç¨¬¥H¤É¯Å==============
+			//åº—é‹ªç¶“é©—è¶³ä»¥å‡ç´š==============
 			if(MainState.FactoryStore[Invest_Store_Number].GetLevelEx()>=100.0f){
-				//¼½©ñµ¥¯Å´£¤É­µ®Ä
+				//æ’­æ”¾ç­‰ç´šæå‡éŸ³æ•ˆ
 				MainState.LevelUP_Button_Sounds_Play();
-				//¼½©ñ¤É¯Å°Êµe
+				//æ’­æ”¾å‡ç´šå‹•ç•«
 				Level_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ©±¾Q¹w´Á§Q¼í´£¤É°Êµe
+				//æ’­æ”¾åº—é‹ªé æœŸåˆ©æ½¤æå‡å‹•ç•«
 				Predict_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ°Ï°ìÁ`¹w´Á§Q¼í¤W¤É°Êµe
+				//æ’­æ”¾å€åŸŸç¸½é æœŸåˆ©æ½¤ä¸Šå‡å‹•ç•«
 				Area_Predict_UP_Animation.Play();
 
-				//©±¾Qµ¥¯Å < 9
+				//åº—é‹ªç­‰ç´š < 9
 				if (MainState.FactoryStore [Invest_Store_Number].GetLevel () < 9) {
 					MainState.FactoryStore [Invest_Store_Number].SetLevel (MainState.FactoryStore [Invest_Store_Number].GetLevel () + 1);
-					//­pºâ¦h¾lªº©±¾Q¸gÅç
+					//è¨ˆç®—å¤šé¤˜çš„åº—é‹ªç¶“é©—
 					MainState.FactoryStore [Invest_Store_Number].SetLevelEx (MainState.FactoryStore [Invest_Store_Number].GetLevelEx () - 100.0f);
 				}
-				//©±¾Qµ¥¯Å == 9
+				//åº—é‹ªç­‰ç´š == 9
 				else {
 					MainState.FactoryStore [Invest_Store_Number].SetLevel (10);
-					//©±¾Q¸gÅç³]¬°0
+					//åº—é‹ªç¶“é©—è¨­ç‚º0
 					MainState.FactoryStore [Invest_Store_Number].SetLevelEx (0.0f);
-					//¨¾¤î¤£¯à¨Ï¥Î«ö¶s
+					//é˜²æ­¢ä¸èƒ½ä½¿ç”¨æŒ‰éˆ•
 					LevelEx_Temp = 0.0f;
 				}
 
 			}
-			//³]©w©±¾Q¤w§ë¸ê
+			//è¨­å®šåº—é‹ªå·²æŠ•è³‡
 			MainState.FactoryStore [Invest_Store_Number].SetInvestBool(true);
-			//ÁôÂÃ¿ï¾ÜÅU°İµe­±
+			//éš±è—é¸æ“‡é¡§å•ç•«é¢
 			ManageStore.SetActive(false);
-			//ÁôÂÃ¨M©wÅU°İµe­±
+			//éš±è—æ±ºå®šé¡§å•ç•«é¢
 			Decision.SetActive(false);
 			break;
-		//»È¦æ®a
+		//éŠ€è¡Œå®¶
 		case 4:
-			//©±¾Q¸gÅç
+			//åº—é‹ªç¶“é©—
 			if (MainState.EconomicStore [Invest_Store_Number].GetLevel () != 10) {
 				MainState.EconomicStore [Invest_Store_Number].SetLevelEx (MainState.EconomicStore [Invest_Store_Number].GetLevelEx () + 1.0f);
 				LevelEx_Temp = LevelEx_Temp - 1.0f;
 			}
-			//©±¾Q¸gÅç¨¬¥H¤É¯Å==============
+			//åº—é‹ªç¶“é©—è¶³ä»¥å‡ç´š==============
 			if(MainState.EconomicStore[Invest_Store_Number].GetLevelEx()>=100.0f){
-				//¼½©ñµ¥¯Å´£¤É­µ®Ä
+				//æ’­æ”¾ç­‰ç´šæå‡éŸ³æ•ˆ
 				MainState.LevelUP_Button_Sounds_Play();
-				//¼½©ñ¤É¯Å°Êµe
+				//æ’­æ”¾å‡ç´šå‹•ç•«
 				Level_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ©±¾Q¹w´Á§Q¼í´£¤É°Êµe
+				//æ’­æ”¾åº—é‹ªé æœŸåˆ©æ½¤æå‡å‹•ç•«
 				Predict_UP_Animation[Invest_Store_Number].Play();
-				//¼½©ñ°Ï°ìÁ`¹w´Á§Q¼í¤W¤É°Êµe
+				//æ’­æ”¾å€åŸŸç¸½é æœŸåˆ©æ½¤ä¸Šå‡å‹•ç•«
 				Area_Predict_UP_Animation.Play();
 
-				//©±¾Qµ¥¯Å < 9
+				//åº—é‹ªç­‰ç´š < 9
 				if (MainState.EconomicStore [Invest_Store_Number].GetLevel () < 9) {
 					MainState.EconomicStore [Invest_Store_Number].SetLevel (MainState.EconomicStore [Invest_Store_Number].GetLevel () + 1);
-					//­pºâ¦h¾lªº©±¾Q¸gÅç
+					//è¨ˆç®—å¤šé¤˜çš„åº—é‹ªç¶“é©—
 					MainState.EconomicStore [Invest_Store_Number].SetLevelEx (MainState.EconomicStore [Invest_Store_Number].GetLevelEx () - 100.0f);
 				}
-				//©±¾Qµ¥¯Å == 9
+				//åº—é‹ªç­‰ç´š == 9
 				else {
 					MainState.EconomicStore [Invest_Store_Number].SetLevel (10);
-					//©±¾Q¸gÅç³]¬°0
+					//åº—é‹ªç¶“é©—è¨­ç‚º0
 					MainState.EconomicStore [Invest_Store_Number].SetLevelEx (0.0f);
-					//¨¾¤î¤£¯à¨Ï¥Î«ö¶s
+					//é˜²æ­¢ä¸èƒ½ä½¿ç”¨æŒ‰éˆ•
 					LevelEx_Temp = 0.0f;
 				}
 
 			}
-			//³]©w©±¾Q¤w§ë¸ê
+			//è¨­å®šåº—é‹ªå·²æŠ•è³‡
 			MainState.EconomicStore [Invest_Store_Number].SetInvestBool(true);
-			//ÁôÂÃ¿ï¾ÜÅU°İµe­±
+			//éš±è—é¸æ“‡é¡§å•ç•«é¢
 			ManageStore.SetActive(false);
-			//ÁôÂÃ¨M©wÅU°İµe­±
+			//éš±è—æ±ºå®šé¡§å•ç•«é¢
 			Decision.SetActive(false);
 			break;
 
 		}//switch
 
-		//°Êµeµ²§ô=============================================================================
+		//å‹•ç•«çµæŸ=============================================================================
 		if (LevelEx_Temp <= 0.0f) {
 			LevelEx_Bool = false;
-			//¤£¬O¨M©wµe­±
+			//ä¸æ˜¯æ±ºå®šç•«é¢
 			DecisionBool = false;
-			//Â÷¶}«ö¶s³]¬°¥i¥Î
+			//é›¢é–‹æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 			LeftButton.interactable = true;
-			//©±¾Q«ö¶s³]¬°¤£¥i¥Î
+			//åº—é‹ªæŒ‰éˆ•è¨­ç‚ºä¸å¯ç”¨
 			StoreButton.interactable = false;
-			//¤H­û«ö¶s³]¬°¥i¥Î
+			//äººå“¡æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 			PeopleButton.interactable = true;
-			//¤W¤@¦ì«ö¶s³]¬°¥i¥Î
+			//ä¸Šä¸€ä½æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 			PreviousButton.interactable = true;
-			//¤U¤@¦ì«ö¶s³]¬°¥i¥Î
+			//ä¸‹ä¸€ä½æŒ‰éˆ•è¨­ç‚ºå¯ç”¨
 			NextButton.interactable = true;
-			//½T©w§ë¸ê«ö¶s¬°¥i¥Î
+			//ç¢ºå®šæŠ•è³‡æŒ‰éˆ•ç‚ºå¯ç”¨
 			ManageInvestionButton.interactable = true;
-			//¨ú®ø§ë¸ê«ö¶s¬°¥i¥Î
+			//å–æ¶ˆæŠ•è³‡æŒ‰éˆ•ç‚ºå¯ç”¨
 			ManageCancelButton.interactable = true;
-			//scrollBar³]¬°¥i¥Î
+			//scrollBarè¨­ç‚ºå¯ç”¨
 			scrollbar.interactable = true;
 		}
 
 
 	}
 
-	//°Æµ{¦¡:³]©w¤ä´©¯à¤OÃC¦â(1:²i¶¹ 2:­µ¼Ö 3:¬ì§Ş 4:¾÷¤u 5:ª÷¿Ä)
+	//å‰¯ç¨‹å¼:è¨­å®šæ”¯æ´èƒ½åŠ›é¡è‰²(1:çƒ¹é£ª 2:éŸ³æ¨‚ 3:ç§‘æŠ€ 4:æ©Ÿå·¥ 5:é‡‘è)
 	void  AdvantageNumber_Color(){
 		switch(Manage_Area_Number){
 		case 0:
-		//1:²i¶¹
+		//1:çƒ¹é£ª
 			if (MainState.BreadStore [Invest_Store_Number].GetClassification () == 1) {
 				AdvantageNumber1_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2620,7 +2621,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-		//2:­µ¼Ö
+		//2:éŸ³æ¨‚
 		else if (MainState.BreadStore [Invest_Store_Number].GetClassification () == 2) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (255.0f, 0.0f, 0.0f);
@@ -2628,7 +2629,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-		//3:¬ì§Ş
+		//3:ç§‘æŠ€
 		else if (MainState.BreadStore [Invest_Store_Number].GetClassification () == 3) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2636,7 +2637,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-		//4:¾÷¤u
+		//4:æ©Ÿå·¥
 		else if (MainState.BreadStore [Invest_Store_Number].GetClassification () == 4) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2644,7 +2645,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-		//5:ª÷¿Ä
+		//5:é‡‘è
 		else if (MainState.BreadStore [Invest_Store_Number].GetClassification () == 5) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2655,7 +2656,7 @@ public class Manage : MonoBehaviour {
 			break;
 
 		case 1:
-			//1:²i¶¹
+			//1:çƒ¹é£ª
 			if (MainState.MusicStore [Invest_Store_Number].GetClassification () == 1) {
 				AdvantageNumber1_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2663,7 +2664,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//2:­µ¼Ö
+			//2:éŸ³æ¨‚
 			else if (MainState.MusicStore [Invest_Store_Number].GetClassification () == 2) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (255.0f, 0.0f, 0.0f);
@@ -2671,7 +2672,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//3:¬ì§Ş
+			//3:ç§‘æŠ€
 			else if (MainState.MusicStore [Invest_Store_Number].GetClassification () == 3) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2679,7 +2680,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//4:¾÷¤u
+			//4:æ©Ÿå·¥
 			else if (MainState.MusicStore [Invest_Store_Number].GetClassification () == 4) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2687,7 +2688,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//5:ª÷¿Ä
+			//5:é‡‘è
 			else if (MainState.MusicStore [Invest_Store_Number].GetClassification () == 5) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2698,7 +2699,7 @@ public class Manage : MonoBehaviour {
 			break;
 
 		case 2:
-			//1:²i¶¹
+			//1:çƒ¹é£ª
 			if (MainState.TehcnologyStore [Invest_Store_Number].GetClassification () == 1) {
 				AdvantageNumber1_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2706,7 +2707,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//2:­µ¼Ö
+			//2:éŸ³æ¨‚
 			else if (MainState.TehcnologyStore [Invest_Store_Number].GetClassification () == 2) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (255.0f, 0.0f, 0.0f);
@@ -2714,7 +2715,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//3:¬ì§Ş
+			//3:ç§‘æŠ€
 			else if (MainState.TehcnologyStore [Invest_Store_Number].GetClassification () == 3) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2722,7 +2723,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//4:¾÷¤u
+			//4:æ©Ÿå·¥
 			else if (MainState.TehcnologyStore [Invest_Store_Number].GetClassification () == 4) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2730,7 +2731,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//5:ª÷¿Ä
+			//5:é‡‘è
 			else if (MainState.TehcnologyStore [Invest_Store_Number].GetClassification () == 5) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2741,7 +2742,7 @@ public class Manage : MonoBehaviour {
 			break;
 
 		case 3:
-			//1:²i¶¹
+			//1:çƒ¹é£ª
 			if (MainState.FactoryStore [Invest_Store_Number].GetClassification () == 1) {
 				AdvantageNumber1_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2749,7 +2750,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//2:­µ¼Ö
+			//2:éŸ³æ¨‚
 			else if (MainState.FactoryStore [Invest_Store_Number].GetClassification () == 2) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (255.0f, 0.0f, 0.0f);
@@ -2757,7 +2758,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//3:¬ì§Ş
+			//3:ç§‘æŠ€
 			else if (MainState.FactoryStore [Invest_Store_Number].GetClassification () == 3) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2765,7 +2766,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//4:¾÷¤u
+			//4:æ©Ÿå·¥
 			else if (MainState.FactoryStore [Invest_Store_Number].GetClassification () == 4) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2773,7 +2774,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//5:ª÷¿Ä
+			//5:é‡‘è
 			else if (MainState.FactoryStore [Invest_Store_Number].GetClassification () == 5) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2784,7 +2785,7 @@ public class Manage : MonoBehaviour {
 			break;
 
 		case 4:
-			//1:²i¶¹
+			//1:çƒ¹é£ª
 			if (MainState.EconomicStore [Invest_Store_Number].GetClassification () == 1) {
 				AdvantageNumber1_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2792,7 +2793,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//2:­µ¼Ö
+			//2:éŸ³æ¨‚
 			else if (MainState.EconomicStore [Invest_Store_Number].GetClassification () == 2) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (255.0f, 0.0f, 0.0f);
@@ -2800,7 +2801,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//3:¬ì§Ş
+			//3:ç§‘æŠ€
 			else if (MainState.EconomicStore [Invest_Store_Number].GetClassification () == 3) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2808,7 +2809,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//4:¾÷¤u
+			//4:æ©Ÿå·¥
 			else if (MainState.EconomicStore [Invest_Store_Number].GetClassification () == 4) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2816,7 +2817,7 @@ public class Manage : MonoBehaviour {
 				AdvantageNumber4_Text.color = new Color (255.0f, 0.0f, 0.0f);
 				AdvantageNumber5_Text.color = new Color (0.0f, 0.0f, 0.0f);
 			} 
-			//5:ª÷¿Ä
+			//5:é‡‘è
 			else if (MainState.EconomicStore [Invest_Store_Number].GetClassification () == 5) {
 				AdvantageNumber1_Text.color = new Color (0.0f, 0.0f, 0.0f);
 				AdvantageNumber2_Text.color = new Color (0.0f, 0.0f, 0.0f);
@@ -2831,33 +2832,33 @@ public class Manage : MonoBehaviour {
 
 
 
-	/*//°Æµ{¦¡:·Æ°ÊScrollBar
+	/*//å‰¯ç¨‹å¼:æ»‘å‹•ScrollBar
 	void Android_ScrollBar(){
-		//¤â«ü¦V¤W·Æ°Ê 
+		//æ‰‹æŒ‡å‘ä¸Šæ»‘å‹• 
 		if (Input.GetAxis ("Mouse Y") > 0.0f) {
 			S.value = S.value + 0.05f;
 			print ("a");
 		}
-		//¤â«ü¦V¤U·Æ°Ê 
+		//æ‰‹æŒ‡å‘ä¸‹æ»‘å‹• 
 		else if (Input.GetAxis ("Mouse Y") < 0.0f) { -610.5 1121 -50 -1171
 			S.value = S.value - 0.05f;
 			print ("b");
 		}
 		//print (Input.GetAxis("Mouse Y"));
 		//S.value = S.value - Input.GetAxis ("Mouse Y");
-		//¬ö¿ı¤â«üÄ²¸I¦ì¸m
+		//ç´€éŒ„æ‰‹æŒ‡è§¸ç¢°ä½ç½®
 		//Vector2 m_screenPos = new Vector2 ();
-		//¬ö¿ıÄ²¸I¦ì¸m
+		//ç´€éŒ„è§¸ç¢°ä½ç½®
 		//m_screenPos = Input.touches[0].position;
 		if(Input.touchCount==1 )
 		{  
 			if(Input.touches[0].phase==TouchPhase.Moved){
-				//¤â«ü¦V¤W·Æ°Ê 
+				//æ‰‹æŒ‡å‘ä¸Šæ»‘å‹• 
 				if (Input.GetAxis ("Mouse Y") > 0.0f) {
 					S.value = S.value + 0.05f;
 					//print ("a");
 				}
-				//¤â«ü¦V¤U·Æ°Ê 
+				//æ‰‹æŒ‡å‘ä¸‹æ»‘å‹• 
 				else if (Input.GetAxis ("Mouse Y") < 0.0f) {
 					S.value = S.value - 0.05f;
 					//print ("b");
