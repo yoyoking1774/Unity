@@ -1,4 +1,4 @@
-//新文字文件.txt
+//新文字文件
 //經營頁面 UI控制 邏輯運算 
 using UnityEngine;
 using System.Collections;
